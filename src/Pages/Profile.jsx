@@ -1,4 +1,8 @@
+import {ProfileDp} from '../Components/ProfileDp'
 const Profile = () => {
-    return <h1>This is profile page</h1>
+    return (
+        <ProfileDp/>
+    )
+
 }
 export default Profile;
