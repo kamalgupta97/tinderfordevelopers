@@ -1,9 +1,9 @@
 import "./App.css";
-
+import Profile from "./Pages/Profile";
 function App() {
   return (
     <div className="App">
-      <h1>Tinder 4 Developer</h1>
+      <Profile />
     </div>
   );
 }
