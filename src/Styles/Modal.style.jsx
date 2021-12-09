@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { device, size } from "./MediaQueries.style";
+import { device } from "./MediaQueries.style";
 
 export const BodyContainer = styled.div`
   position: absolute;
@@ -39,4 +39,30 @@ export const LoginModal = styled.div`
     left: 0;
     border-radius: 0px;
   }
+  & h1 {
+    margin-top: 20%;
+  }
+`;
+
+export const LoginButton = styled.button`
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  height: 60px;
+  margin: 3% auto;
+  background-color: white;
+  @media only screen and ${device.desktop} {
+    width: 70%;
+  }
+  @media only screen and ${device.ipad} {
+    width: 80%;
+  }
+  @media only screen and ${device.tablet} {
+    width: 90%;
+  }
+`;
+
+export const MyIcon = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;

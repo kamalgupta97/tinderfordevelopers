@@ -1,12 +1,26 @@
 import React from "react";
-import { BodyContainer, LoginModal } from "../Styles/Modal.style";
+import CancelIcon from "@mui/icons-material/Cancel";
+import {
+  BodyContainer,
+  LoginButton,
+  LoginModal,
+  MyIcon,
+} from "../Styles/Modal.style";
 
 export const Modal = () => {
   return (
     <div>
       <BodyContainer></BodyContainer>
+
       <LoginModal>
-        <h1>Login</h1>
+        <MyIcon>
+          <CancelIcon />
+        </MyIcon>
+
+        <h1>Let's Go!</h1>
+        <LoginButton></LoginButton>
+        <LoginButton></LoginButton>
+        <LoginButton></LoginButton>
       </LoginModal>
     </div>
   );
