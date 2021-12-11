@@ -11,7 +11,7 @@ const ProfileDp = () => {
         </div>
         <div id="user_dp">
           <img
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+            src="/rahul.jpg"
             alt=""
           />
         </div>
@@ -52,6 +52,8 @@ const ProfileDp = () => {
             />
           </StyledSocialIcon>
         </div>
+        {/* Edit profile button */}
+        <StyledEditProfileBtn>Edit profile</StyledEditProfileBtn>
       </StyledUserDpInfo>
     </StyledProfileDp>
   );
@@ -59,16 +61,14 @@ const ProfileDp = () => {
 export { ProfileDp };
 const StyledProfileDp = styled.div`
   border: 1px solid gainsboro;
-  width: 50%;
-  height: 600px;
+  width: 800px;
+  height: 480px;
   border-radius: 20px;
-  margin: auto;
-  margin-top: 20px;
+  margin-top:20px;
 `;
 const StyledCoverNDp = styled.div`
   width: 100%;
   height: 50%;
-  border: 1px solid black;
   border-radius: 20px 20px 0 0;
   position: relative;
   & > #cover_img {
@@ -82,9 +82,9 @@ const StyledCoverNDp = styled.div`
     }
   }
   & > #user_dp {
-    width: 200px;
-    height: 200px;
-    border: 8px solid white;
+    width: 22%;
+    height: 75%;
+    border: 7px solid white;
     border-radius: 50%;
     position: absolute;
     bottom: -30%;
@@ -97,24 +97,38 @@ const StyledCoverNDp = styled.div`
   }
 `;
 const StyledUserDpInfo = styled.div`
-  margin-left: 280px;
+  margin-left: 33%;
   text-align: left;
+  position: relative;
   & > .social_media_icons {
-    /* border:1px solid black; */
+    /* border: 1px solid black; */
     display: flex;
-    margin-top: 40px;
+    height: 40px;
+    margin-top: 6%;
   }
 `;
 const StyledSocialIcon = styled.div`
   border: 1px solid gainsboro;
-  width: 60px;
-  height: 60px;
-  margin-right: 20px;
+  width: 12%;
+  height: 100%;
+  margin-right: 3%;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   & > img {
-    width: 80%;
+    width: 70%;
   }
+`;
+const StyledEditProfileBtn = styled.button`
+  border: 1px solid gainsboro;
+  background-color: white;
+  width: 30%;
+  height: 23%;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  position: absolute;
+  right: 5%;
+  top: 5%;
 `;
