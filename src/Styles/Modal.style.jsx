@@ -39,7 +39,7 @@ export const LoginModal = styled.div`
     left: 0;
     border-radius: 0px;
   }
-  & h1 {
+  & > h1 {
     margin-top: 20%;
   }
 `;
