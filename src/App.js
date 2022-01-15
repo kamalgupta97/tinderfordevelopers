@@ -1,10 +1,15 @@
 import "./App.css";
-import AddProjectDesciptions from "./Pages/AddProjectDesciptions";
-import { AddProjectImages } from "./Pages/AddProjectImages";
+import {
+  ChatSection,
+  AddProjectImages,
+  AddProjectDesciptions,
+  CreateAccountForm,
+} from "./Pages";
+
 function App() {
   return (
     <div className="App">
-      <AddProjectDesciptions />
+      <ChatSection />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import TagsInput from "../Components/TagsInput";
 import { Paper, TextareaAutosize } from "@material-ui/core";
 import { Description, Tags } from "../Styles/AddProject.style";
 
-export default function AddProjectDesciptions() {
+export const AddProjectDesciptions = () => {
   function handleSelecetedTags(items) {
     console.log(items);
   }
@@ -40,4 +40,4 @@ export default function AddProjectDesciptions() {
       </LoginModal>
     </div>
   );
-}
+};
