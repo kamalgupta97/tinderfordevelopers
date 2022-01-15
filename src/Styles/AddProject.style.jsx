@@ -9,7 +9,7 @@ export const UploadImageContainer = styled.div`
   grid-gap: 10%;
   margin: 15%;
   width: 70%;
-  height: 60%;
+  height: 70%;
   //   background: red;
 `;
 
@@ -26,9 +26,19 @@ export const UploadImage = styled.div`
   }
 `;
 
-export const UploadLinks = styled.div`
-  margin: 5% auto 0 auto;
-  width: 80%;
-  height: 30%;
-  border: 2px solid #cecece;
+export const Tags = styled.div`
+  margin: 10% auto;
+  width: 70%;
+  height: 20%;
+`;
+
+export const Description = styled.div`
+  margin: 10% auto;
+  width: 70%;
+`;
+
+export const TagsArea = styled.div`
+  & > input {
+    border: none;
+  }
 `;
