@@ -5,7 +5,7 @@ import { BodyContainer, LoginModal, MyIcon } from "../Styles/Modal.style";
 
 import { UploadImageCont } from "../Components/UploadImageCont";
 
-export const AddProject = () => {
+export const AddProjectImages = () => {
   return (
     <div>
       <BodyContainer></BodyContainer>
@@ -19,7 +19,6 @@ export const AddProject = () => {
           <UploadImageCont></UploadImageCont>
           <UploadImageCont></UploadImageCont>
         </UploadImageContainer>
-        <UploadLinks></UploadLinks>
       </LoginModal>
     </div>
   );
