@@ -14,4 +14,13 @@ export {
   SingleFriend as SingleFriend,
   SingleProfileTime as SingleProfileTime,
   SingleProfilePhoto as SingleProfilePhoto,
+  DefaultImage as DefaultImage,
+  ChatHeader as ChatHeader,
+  ChatHeaderImage as ChatHeaderImage,
+  ChatHeaderName as ChatHeaderName,
+  ChatHeaderIcons as ChatHeaderIcons,
+  MessageBox as MessageBox,
+  Friendsmessage as Friendsmessage,
+  Mymessage as Mymessage,
+  StickyMessage as StickyMessage,
 } from "./ChatSection.style";

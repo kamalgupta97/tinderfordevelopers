@@ -9,15 +9,17 @@ import Avatar from "@mui/material/Avatar";
 
 export const ChatList = ({
   id,
-
   profile_pic,
   userName,
   Name,
   messages,
+  handlSelectFriend,
 }) => {
   console.log(id, profile_pic, userName, Name, messages);
   return (
-    <SingleFriend>
+    <SingleFriend
+      onClick={() => handlSelectFriend(Name, profile_pic, messages)}
+    >
       <SingleProfilePhoto>
         <Avatar alt="Remy Sharp" src={profile_pic} />
       </SingleProfilePhoto>
