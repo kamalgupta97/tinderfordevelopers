@@ -4,7 +4,7 @@ export const ChatContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100vh;
-  background: #00ff7f;
+  background: green;
 `;
 
 export const ChatCont = styled.div`
@@ -117,4 +117,69 @@ export const SingleProfileName = styled.div`
 export const SingleProfileTime = styled.div`
   grid-area: time;
   color: #ccc;
+`;
+
+export const DefaultImage = styled.div`
+  height: 80%;
+  width: 80%;
+  margin: 10% auto;
+  & > img {
+    width: 80%;
+  }
+`;
+
+export const ChatHeader = styled.div`
+  margin: auto;
+  height: 70px;
+  width: 95%;
+  box-shadow: 0px 2px 0px 0px #ececec;
+  display: grid;
+  align-items: center;
+  // border-radius: 10px;
+  grid-template-columns: 8% 80% 12%;
+  grid-template-rows: 100%;
+  grid-template-areas: "img prof ico";
+`;
+export const ChatHeaderImage = styled.div`
+  grid-area: img;
+`;
+export const ChatHeaderName = styled.div`
+  text-align: left;
+  grid-area: prof;
+`;
+export const ChatHeaderIcons = styled.div`
+  grid-area: ico;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const MessageBox = styled.div`
+  margin: 20px auto;
+  height: 500px;
+  max-height: 500px;
+  width: 95%;
+  box-shadow: 0px 2px 0px 0px #ececec;
+`;
+export const Friendsmessage = styled.div`
+  align-items: center;
+  text-align: right;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+`;
+export const Mymessage = styled.div`
+  align-items: center;
+  text-align: left;
+  width: 50%;
+  display: flex;
+  gap: 10px;
+`;
+
+export const StickyMessage = styled.div`
+  background: green;
+  max-width: 200px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: #fff;
 `;
