@@ -17,7 +17,7 @@ export { ProjectCarousel };
 
 const StyledProjectCarousel = styled.div`
   border: 1px solid gainsboro;
-  width: 800px;
+  width: 100%;
   box-sizing: border-box;
   /* height: 480px; */
   border-radius: 20px;

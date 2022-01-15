@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import MailIcon from '@mui/icons-material/Mail';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 const ProfileDp = () => {
   return (
     <StyledProfileDp>
@@ -19,41 +26,26 @@ const ProfileDp = () => {
       <StyledUserDpInfo>
         <h1>Rahul Rajput</h1>
         <p>CEO of tinder for developers</p>
-        <div>New delhi, Delhi</div>
+        <div id="location">New delhi, Delhi</div>
         <div className="social_media_icons">
           <StyledSocialIcon>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
+            <GitHubIcon/>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
+            <LinkedInIcon/>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
+            <TwitterIcon/>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
+            <MailIcon/>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <img
-              src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-              alt=""
-            />
+            <LocalPhoneIcon/>
           </StyledSocialIcon>
         </div>
         {/* Edit profile button */}
-        <StyledEditProfileBtn>Edit profile</StyledEditProfileBtn>
+        <StyledEditProfileBtn><ModeEditOutlineOutlinedIcon/>Edit profile</StyledEditProfileBtn>
       </StyledUserDpInfo>
     </StyledProfileDp>
   );
@@ -61,8 +53,8 @@ const ProfileDp = () => {
 export { ProfileDp };
 const StyledProfileDp = styled.div`
   border: 1px solid gainsboro;
-  width: 800px;
-  height: 480px;
+  width: 100%;
+  height: 450px;
   border-radius: 20px;
   margin-top:20px;
 `;
@@ -101,10 +93,17 @@ const StyledUserDpInfo = styled.div`
   text-align: left;
   position: relative;
   & > .social_media_icons {
-    /* border: 1px solid black; */
     display: flex;
     height: 40px;
-    margin-top: 6%;
+    margin-top: 4%;
+  }
+  & #location {
+    background-color: #e7e7e9;
+    max-width: max-content;
+    padding:10px;
+    font-weight: bold;
+    font-size:14px;
+    border-radius: 10px;
   }
 `;
 const StyledSocialIcon = styled.div`
@@ -131,4 +130,7 @@ const StyledEditProfileBtn = styled.button`
   position: absolute;
   right: 5%;
   top: 5%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 `;
