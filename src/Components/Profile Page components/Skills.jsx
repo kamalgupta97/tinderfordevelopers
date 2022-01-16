@@ -2,10 +2,10 @@ import Styled from "styled-components";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import { ChipsArray } from './ChipsArray.material';
 import { useSelector } from 'react-redux';
-const Skills = ({closeModel}) => {
+const Skills = ({toggleModel}) => {
   const skillsFromStore = useSelector(store => store.user_skills);
   const skillsEditModel = () => {
-    closeModel();
+    toggleModel();
   };
   return (
     <StyledSkills>
@@ -28,7 +28,6 @@ const StyledSkills = Styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
   }
 `;
 export { Skills };

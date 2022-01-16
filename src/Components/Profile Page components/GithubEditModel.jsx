@@ -2,11 +2,11 @@ import ClearIcon from "@mui/icons-material/Clear";
 import styled from "styled-components";
 import { useState } from "react";
 import { Dialog } from "@mui/material";
-import { useDispatch , useSelector} from "react-redux";
-import {updateSummary} from '../../Redux/action'
-const SummaryEditModel = ({ toggleModel }) => {
-  const summaryFromStore = useSelector(store => store.user_summary)
-  const [summary, setSummary] = useState(summaryFromStore)
+import { useDispatch, useSelector } from "react-redux";
+import { updateGithub } from "../../Redux/action";
+const GithubEditModel = ({ toggleModel }) => {
+  const githubUserNameFromStore = useSelector((store) => store.user_github);
+  const [newUserName, setNewUserName] = useState(githubUserNameFromStore);
   const dispatch = useDispatch();
   return (
     <StyledDialog open={true} onClose={() => toggleModel()}>
@@ -14,26 +14,29 @@ const SummaryEditModel = ({ toggleModel }) => {
         <h3> Edit about</h3> <StyledClearIcon onClick={() => toggleModel()} />
       </StyledDialogTitle>
       <StyledDialogContent>
-        <p>
-          You can write about your years of experience, industry, or skills.
-          People also talk about their achievements or previous job experiences.
-        </p>
-        <textarea rows="10" onChange = {(e) => setSummary(e.target.value)}>
-          {summaryFromStore}
-        </textarea>
+        <input type="search" value={newUserName} placeholder="Enter skill name" onChange={(e) => setNewUserName(e.target.value)} />
       </StyledDialogContent>
       <footer>
-        <button onClick={() => {
-          dispatch(updateSummary(summary))
-          toggleModel();
-        }}>Save</button>
+        <button
+          onClick={() => {
+            dispatch(updateGithub(newUserName));
+            toggleModel();
+          }}
+        >
+          Save
+        </button>
       </footer>
     </StyledDialog>
   );
 };
 
-export { SummaryEditModel };
-const StyledDialog = styled(Dialog)``;
+export { GithubEditModel };
+const StyledDialog = styled(Dialog)`
+    & div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper {
+        min-width:40%;
+        background-color:white;
+    }
+`;
 const StyledDialogTitle = styled.div`
   display: flex;
   justify-content: space-between;
@@ -41,15 +44,15 @@ const StyledDialogTitle = styled.div`
   padding: 0 5% 0 5%;
 `;
 const StyledDialogContent = styled.div`
-  padding: 0 5% 0 5%;
+  padding: 2% 5% 2% 5%;
   border: 1px solid gainsboro;
   border-left: none;
   border-right: none;
-  & > textarea {
-    width: 100% !important;
+  & > input {
+    width: 100%;
     padding: 10px;
     font-size: 15px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     box-sizing: border-box;
   }
   & + footer {
@@ -66,6 +69,7 @@ const StyledDialogContent = styled.div`
       border-radius: 30px;
     }
   }
+
 `;
 
 const StyledClearIcon = styled(ClearIcon)`

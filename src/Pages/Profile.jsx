@@ -9,22 +9,25 @@ import { UserAvailable } from "../Components/Profile Page components/UserAvailab
 import { Recommendations } from "../Components/Profile Page components/Recommendations";
 import { SummaryEditModel } from "../Components/Profile Page components/SummaryEditModel";
 import { useState } from "react";
-import {SkillEditModel} from '../Components/Profile Page components/SkillEditModel'
+import { SkillEditModel } from '../Components/Profile Page components/SkillEditModel';
+import {GithubEditModel} from "../Components/Profile Page components/GithubEditModel"
 const Profile = () => {
   const [isSumModelOpen, setSumModelOpen] = useState(false);
   const [isSkillModelOpen, setSkillModelOpen] = useState(false);
+  const [isGithubModelOpen, setGithubModelOpen] = useState(true);
   return (
     <>
-      {isSumModelOpen && <SummaryEditModel closeModel={() => setSumModelOpen(!isSumModelOpen)} />}
-      {isSkillModelOpen && <SkillEditModel closeModel={() => setSkillModelOpen(!isSkillModelOpen)}/>}
+      {isSumModelOpen && <SummaryEditModel toggleModel={() => setSumModelOpen(!isSumModelOpen)} />}
+      {isSkillModelOpen && <SkillEditModel toggleModel={() => setSkillModelOpen(!isSkillModelOpen)}/>}
+      {isGithubModelOpen && <GithubEditModel toggleModel={() => setGithubModelOpen(!isGithubModelOpen)}/>}
       <StyledProfile>
         <ProfileNavbar />
         <div id="profileBody">
           <div id="leftPart">
             <ProfileDp /> 
-            <Summary closeModel={() => setSumModelOpen(!isSumModelOpen)} />
-            <Skills closeModel={() => setSkillModelOpen(!isSkillModelOpen)}/>
-            <Github />
+            <Summary toggleModel={() => setSumModelOpen(!isSumModelOpen)} />
+            <Skills toggleModel={() => setSkillModelOpen(!isSkillModelOpen)}/>
+            <Github toggleModel={() => setGithubModelOpen(!isGithubModelOpen)}/>
             <ProjectCarousel />
           </div>
           <div id="rightPart">

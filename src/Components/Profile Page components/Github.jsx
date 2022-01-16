@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import GitHubCalendar from 'react-github-calendar';
 import ReactTooltip from 'react-tooltip';
-const Github = () => {
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import {useSelector} from 'react-redux'
+const Github = ({toggleModel}) => {
+  const githubUsername = useSelector(store => store.user_github);
   return (
     <StyledGithub>
-      <h2 id="title">My Github Graph</h2>
-      <GitHubCalendar username="rahul3105" children={<ReactTooltip html />} color={"rgb(0, 200, 5)"}/>
+      <header>
+        <h2 id="title">Github Graph</h2>
+        <ModeEditOutlineOutlinedIcon onClick={() => toggleModel()}/>
+      </header>
+      <GitHubCalendar username={githubUsername} children={<ReactTooltip html />} color={"rgb(0, 200, 5)"} />
     </StyledGithub>
   );
 };
@@ -22,7 +28,9 @@ const StyledGithub = styled.div`
     width: 100%;
     border-radius: 20px;
   }
-  & > #title {
-    text-align: left;
+  & > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;

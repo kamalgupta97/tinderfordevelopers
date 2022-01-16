@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ChipsArray } from "./ChipsArray.material";
 import { updateSkill } from '../../Redux/action'
 import { v4 as uuid } from 'uuid';
-const SkillEditModel = ({ closeModel }) => {
+const SkillEditModel = ({ toggleModel }) => {
     const skillsFromStore = useSelector((store) => store.user_skills);
     const [newSkill, setNewSkill] = useState("");
     const [allSkills, setAllSkills] = useState(skillsFromStore);
@@ -32,9 +32,9 @@ const SkillEditModel = ({ closeModel }) => {
         dispatch(updateSkill(allSkills))
     }
     return (
-        <StyledDialog open={true} onClose={() => closeModel()}>
+        <StyledDialog open={true} onClose={() => toggleModel()}>
             <StyledDialogTitle>
-                <h3> Edit skills</h3> <StyledClearIcon onClick={() => closeModel()} />
+                <h3> Edit skills</h3> <StyledClearIcon onClick={() => toggleModel()} />
             </StyledDialogTitle>
             <StyledDialogContent>
                 <ChipsArray chips={allSkills} removeSkill={removeSkill} isEditable={ true }/>
@@ -47,7 +47,7 @@ const SkillEditModel = ({ closeModel }) => {
                 <button
                     onClick={() => {
                         saveSkills();
-                        closeModel();
+                        toggleModel();
                     }}
                 >
                     Save

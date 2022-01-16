@@ -1,4 +1,4 @@
-import { UPDATE_SUMMARY, UPDATE_SKILL } from "./actionTypes";
+import { UPDATE_SUMMARY, UPDATE_SKILL, UPDATE_GITHUB } from "./actionTypes";
 const summaryContent = `Hii there!  🙋‍♂️
 
 - Professionally, I'm a MERN stack developer, but not bound to only a specific technology.
@@ -25,6 +25,7 @@ const initState = {
     { key: 3, label: "React" },
     { key: 4, label: "Vue.js" },
   ],
+  user_github: "rahul3105",
 };
 const reducer = (store = initState, { type, payload }) => {
   switch (type) {
@@ -32,6 +33,8 @@ const reducer = (store = initState, { type, payload }) => {
       return { ...store, user_summary: payload };
     case UPDATE_SKILL:
       return { ...store, user_skills: payload };
+    case UPDATE_GITHUB:
+      return { ...store, user_github: payload };
     default:
       return store;
   }
