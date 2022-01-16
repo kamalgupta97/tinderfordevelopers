@@ -20,7 +20,20 @@ import {
   Friendsmessage,
   Mymessage,
   StickyMessage,
+  SingleMessageItem,
+  SingleMessageItemImg,
+  StickyMessageMe,
+  TypeMessageContainer,
+  TypeMessageCont,
+  MicIconType,
+  TypeArea,
+  OtherIcons,
+  SendCircle,
+  ChatSelectedProfileImage,
+  ChatSelectedProfileName,
+  ChatSelectedProfileDesignation,
 } from "../Styles";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import MicOutlinedIcon from "@mui/icons-material/MicOutlined";
 import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
@@ -89,13 +102,23 @@ export const ChatSection = () => {
               </ChatHeader>
               <MessageBox>
                 {slectedusersMessages?.map((item, i) => (
-                  <div key={i}>
+                  <SingleMessageItem key={i}>
                     {item.sender == "kamalmasai" ? (
                       <Mymessage>
-                        <Avatar alt="Remy Sharp" src={myprofilurl} />
-                        <StickyMessage>
+                        {slectedusersMessages[i].sender !==
+                          slectedusersMessages[i + 1]?.sender && (
+                          <SingleMessageItemImg>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={myprofilurl}
+                              sx={{ width: 25, height: 25 }}
+                            />
+                          </SingleMessageItemImg>
+                        )}
+
+                        <StickyMessageMe>
                           <p>{item.message}</p>
-                        </StickyMessage>
+                        </StickyMessageMe>
                       </Mymessage>
                     ) : (
                       <Friendsmessage>
@@ -103,12 +126,39 @@ export const ChatSection = () => {
                         <StickyMessage>
                           <p>{item.message}</p>
                         </StickyMessage>
-                        <Avatar alt="Remy Sharp" src={selectedprofilePhoto} />
+                        {slectedusersMessages[i].sender !==
+                          slectedusersMessages[i + 1]?.sender && (
+                          <SingleMessageItemImg>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={selectedprofilePhoto}
+                              sx={{ width: 25, height: 25 }}
+                            />
+                          </SingleMessageItemImg>
+                        )}
                       </Friendsmessage>
                     )}
-                  </div>
+                  </SingleMessageItem>
                 ))}
               </MessageBox>
+              <TypeMessageContainer>
+                <TypeMessageCont>
+                  <MicIconType>
+                    <MicOutlinedIcon />
+                  </MicIconType>
+                  <TypeArea>
+                    <input type="text" placeholder="Write Something..." />
+                  </TypeArea>
+                  <OtherIcons>
+                    <AttachFileOutlinedIcon />
+                    <CameraAltOutlinedIcon />
+                    <SentimentVerySatisfiedIcon />
+                  </OtherIcons>
+                  <SendCircle>
+                    <SendIcon />
+                  </SendCircle>
+                </TypeMessageCont>
+              </TypeMessageContainer>
             </>
           ) : (
             <DefaultImage>
@@ -119,7 +169,29 @@ export const ChatSection = () => {
             </DefaultImage>
           )}
         </ChatRoom>
-        <ChatSelectedProfile></ChatSelectedProfile>
+
+        <ChatSelectedProfile>
+          <SearchCont>
+            <SearchBox>
+              <SearchIcon />
+              <SerachBoxInput placeholder="Search People"></SerachBoxInput>
+            </SearchBox>
+          </SearchCont>
+
+          <ChatSelectedProfileImage>
+            <Avatar
+              alt="Remy Sharp"
+              src={selectedprofilePhoto}
+              sx={{ width: 100, height: 100 }}
+            />
+          </ChatSelectedProfileImage>
+          <ChatSelectedProfileName>
+            <h4>{selectedUsername}</h4>
+          </ChatSelectedProfileName>
+          <ChatSelectedProfileDesignation>
+            <p>{selectedUsername}</p>
+          </ChatSelectedProfileDesignation>
+        </ChatSelectedProfile>
       </ChatCont>
     </ChatContainer>
   );

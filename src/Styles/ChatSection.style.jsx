@@ -35,6 +35,7 @@ export const ChatRoom = styled.div`
   background: #fff;
 `;
 export const ChatSelectedProfile = styled.div`
+  padding: 10% 0%;
   grid-area: profile;
   background: #ececec;
   border-top-right-radius: 20px;
@@ -161,25 +162,120 @@ export const MessageBox = styled.div`
   box-shadow: 0px 2px 0px 0px #ececec;
 `;
 export const Friendsmessage = styled.div`
-  align-items: center;
-  text-align: right;
-  width: 100%;
-  display: flex;
-  gap: 10px;
+  grid-area: friendmessage;
+  align-items: end;
+  text-align: left;
+  display: grid;
   justify-content: right;
+  grid-template-columns: 80% 5%;
+  gap: 1%;
+  grid-template-rows: 100%;
+  grid-template-areas: "singlemes singleimg";
 `;
 export const Mymessage = styled.div`
-  align-items: center;
+  grid-area: mymessage;
+  align-items: end;
   text-align: left;
-  width: 50%;
-  display: flex;
-  gap: 10px;
+  display: grid;
+  gap: 5%;
+  grid-template-columns: 5% 90%;
+  grid-template-rows: 100%;
+  grid-template-areas: "singleimg singlemes";
+`;
+
+export const SingleMessageItem = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  gap: 20%;
+  grid-template-areas: "mymessage friendmessage";
 `;
 
 export const StickyMessage = styled.div`
   background: green;
+  padding: 1px 20px;
   max-width: 200px;
-  padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 10px;
   color: #fff;
+  grid-area: singlemes;
+`;
+
+export const StickyMessageMe = styled.div`
+  background: green;
+  padding: 1px 20px;
+  max-width: 200px;
+  border-radius: 10px 10px 10px 0px;
+  color: #fff;
+  grid-area: singlemes;
+`;
+
+export const SingleMessageItemImg = styled.div`
+  grid-area: singleimg;
+`;
+
+export const TypeMessageContainer = styled.div`
+  width: 95%;
+  margin: auto;
+  height: 60px;
+  border-radius: 30px;
+  background: #ececec;
+`;
+export const TypeMessageCont = styled.div`
+  display: grid;
+  height: 100%;
+  grid-template-columns: 7% 70% 11% 3%;
+  align-items: center;
+  gap: 1%;
+  grid-template-areas: "lef mid right rightt";
+`;
+
+export const MicIconType = styled.div`
+  grid-area: lef;
+  margin-left: 10px;
+`;
+export const TypeArea = styled.div`
+  grid-area: mid;
+  height: 100%;
+
+  & > input {
+    border: none;
+    width: 100%;
+    height: 80%;
+    background: #ececec;
+    font-size: 20px;
+  }
+  & > input:focus {
+    outline: none;
+  }
+`;
+export const OtherIcons = styled.div`
+  grid-area: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const SendCircle = styled.div`
+  grid-area: rightt;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background: green;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ChatSelectedProfileImage = styled.div`
+  width: 50%;
+  margin: 10px auto;
+`;
+export const ChatSelectedProfileName = styled.div`
+  width: 50%;
+  margin: auto;
+`;
+export const ChatSelectedProfileDesignation = styled.div`
+  width: 50%;
+  margin: auto;
 `;
