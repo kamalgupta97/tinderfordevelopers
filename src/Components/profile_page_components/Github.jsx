@@ -9,7 +9,7 @@ const Github = ({toggleModel}) => {
     <StyledGithub>
       <header>
         <h2 id="title">Github Graph</h2>
-        <ModeEditOutlineOutlinedIcon onClick={() => toggleModel()}/>
+        <StyledModeEditOutlineOutlinedIcon onClick={() => toggleModel()}/>
       </header>
       <GitHubCalendar username={githubUsername} children={<ReactTooltip html />} color={"rgb(0, 200, 5)"} />
     </StyledGithub>
@@ -34,3 +34,7 @@ const StyledGithub = styled.div`
     align-items: center;
   }
 `;
+const StyledModeEditOutlineOutlinedIcon = styled(ModeEditOutlineOutlinedIcon)`
+  cursor: pointer;
+`;
+

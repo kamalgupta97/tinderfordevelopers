@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import MailIcon from '@mui/icons-material/Mail';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-const ProfileDp = () => {
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import MailIcon from "@mui/icons-material/Mail";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useSelector } from "react-redux";
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+const ProfileDp = ({ toggleProfileModel , toggleDPModel}) => {
+  const profileInfo = useSelector((store) => store.user_profile);
   return (
     <StyledProfileDp>
       <StyledCoverNDp>
@@ -17,35 +20,52 @@ const ProfileDp = () => {
           />
         </div>
         <div id="user_dp">
-          <img
-            src="/rahul.jpg"
-            alt=""
-          />
+          <img src="/rahul.jpg" alt="" />
+          <div className="overlay" onClick = {() => toggleDPModel()}>
+            <div>
+            <CameraAltOutlinedIcon />
+            <p> Change Photo </p>
+            </div>
+          </div>
         </div>
       </StyledCoverNDp>
       <StyledUserDpInfo>
-        <h1>Rahul Rajput</h1>
-        <p>CEO of tinder for developers</p>
-        <div id="location">New delhi, Delhi</div>
+        <h1>
+          {profileInfo.first_name} {profileInfo.last_name}
+        </h1>
+        <h4>{profileInfo.position}</h4>
+        <div id="location">
+          <LocationOnIcon />
+          {profileInfo.location}
+        </div>
         <div className="social_media_icons">
           <StyledSocialIcon>
-            <GitHubIcon/>
+            <a href={profileInfo.github_url} target="_blank">
+              <GitHubIcon />
+            </a>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <LinkedInIcon/>
+            <a href={profileInfo.linkedin_url} target="_blank">
+              <LinkedInIcon />
+            </a>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <TwitterIcon/>
+            <a href={profileInfo.twitter_url} target="_blank">
+              <TwitterIcon />
+            </a>
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <MailIcon/>
+            <MailIcon />
           </StyledSocialIcon>
           <StyledSocialIcon>
-            <LocalPhoneIcon/>
+            <LocalPhoneIcon />
           </StyledSocialIcon>
         </div>
         {/* Edit profile button */}
-        <StyledEditProfileBtn><ModeEditOutlineOutlinedIcon/>Edit profile</StyledEditProfileBtn>
+        <StyledEditProfileBtn onClick={() => toggleProfileModel()}>
+          <ModeEditOutlineOutlinedIcon />
+          Edit profile
+        </StyledEditProfileBtn>
       </StyledUserDpInfo>
     </StyledProfileDp>
   );
@@ -56,7 +76,7 @@ const StyledProfileDp = styled.div`
   width: 100%;
   height: 450px;
   border-radius: 20px;
-  margin-top:20px;
+  margin-top: 20px;
 `;
 const StyledCoverNDp = styled.div`
   width: 100%;
@@ -86,6 +106,28 @@ const StyledCoverNDp = styled.div`
       height: 100%;
       border-radius: 50%;
     }
+    .overlay {
+      position: absolute;
+      opacity: 0;
+      transition: all 0.3s ease;
+      width: 0%;
+      height: 0;
+      top: 0;
+      left: 0;
+      background-color: #00000078;
+      border-radius: 50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      cursor: pointer;
+      
+    }
+    :hover > .overlay {
+      width: 100% !important;
+      height: 100% !important;
+      opacity: 1 !important;
+    }
   }
 `;
 const StyledUserDpInfo = styled.div`
@@ -100,10 +142,19 @@ const StyledUserDpInfo = styled.div`
   & #location {
     background-color: #e7e7e9;
     max-width: max-content;
-    padding:10px;
+    padding: 10px;
     font-weight: bold;
-    font-size:14px;
+    font-size: 14px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  & > h1 {
+    margin-bottom: 0;
+  }
+  & > h4 {
+    margin-top: 1%;
   }
 `;
 const StyledSocialIcon = styled.div`
@@ -123,6 +174,7 @@ const StyledEditProfileBtn = styled.button`
   border: 1px solid gainsboro;
   background-color: white;
   width: 30%;
+  cursor: pointer;
   height: 23%;
   border-radius: 8px;
   font-weight: bold;
@@ -130,7 +182,7 @@ const StyledEditProfileBtn = styled.button`
   position: absolute;
   right: 5%;
   top: 5%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 `;

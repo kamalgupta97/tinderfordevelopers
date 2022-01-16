@@ -1,4 +1,9 @@
-import { UPDATE_SUMMARY, UPDATE_SKILL, UPDATE_GITHUB } from "./actionTypes";
+import {
+  UPDATE_SUMMARY,
+  UPDATE_SKILL,
+  UPDATE_GITHUB,
+  UPDATE_PROFILE,
+} from "./actionTypes";
 const summaryContent = `Hii there!  🙋‍♂️
 
 - Professionally, I'm a MERN stack developer, but not bound to only a specific technology.
@@ -26,6 +31,17 @@ const initState = {
     { key: 4, label: "Vue.js" },
   ],
   user_github: "rahul3105",
+  user_profile: {
+    first_name: "Rahul",
+    last_name: "Rajput",
+    position: "CEO of tinder for developers",
+    location: "New delhi, Delhi",
+    github_url: "https://github.com/Rahul3105/",
+    linkedin_url: "https://www.linkedin.com/in/rahul-rajput-3105/",
+    twitter_url: "",
+    email: "rahulrajput7358@gmail.com",
+    phone: "7683004927",
+  },
 };
 const reducer = (store = initState, { type, payload }) => {
   switch (type) {
@@ -35,6 +51,9 @@ const reducer = (store = initState, { type, payload }) => {
       return { ...store, user_skills: payload };
     case UPDATE_GITHUB:
       return { ...store, user_github: payload };
+    case UPDATE_PROFILE:
+      console.log("jungle");
+      return { ...store, user_profile: { ...store.user_profile, ...payload } };
     default:
       return store;
   }

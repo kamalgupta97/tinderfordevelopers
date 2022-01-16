@@ -1,4 +1,4 @@
-import Styled from "styled-components";
+import styled from "styled-components";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import { ChipsArray } from './ChipsArray.material';
 import { useSelector } from 'react-redux';
@@ -11,13 +11,13 @@ const Skills = ({toggleModel}) => {
     <StyledSkills>
       <header>
         <h2 id="title">Tech Stack / Skills</h2>
-        <ModeEditOutlineOutlinedIcon onClick={skillsEditModel}/>
+        <StyledModeEditOutlineOutlinedIcon  onClick={skillsEditModel}/>
       </header>
       <ChipsArray chips={ skillsFromStore }/>
     </StyledSkills>
   );
 };
-const StyledSkills = Styled.div`
+const StyledSkills = styled.div`
   border: 1px solid gainsboro;
   width: 100%;
   border-radius: 20px;
@@ -29,6 +29,9 @@ const StyledSkills = Styled.div`
     justify-content: space-between;
     align-items: center;
   }
+`;
+const StyledModeEditOutlineOutlinedIcon = styled(ModeEditOutlineOutlinedIcon)`
+  cursor: pointer;
 `;
 export { Skills };
 
