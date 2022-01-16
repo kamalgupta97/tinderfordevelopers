@@ -9,19 +9,21 @@ import { UserAvailable } from "../Components/Profile Page components/UserAvailab
 import { Recommendations } from "../Components/Profile Page components/Recommendations";
 import { SummaryEditModel } from "../Components/Profile Page components/SummaryEditModel";
 import { useState } from "react";
+import {SkillEditModel} from '../Components/Profile Page components/SkillEditModel'
 const Profile = () => {
   const [isSumModelOpen, setSumModelOpen] = useState(false);
-  const closeModel = () =>  setSumModelOpen(!isSumModelOpen);
+  const [isSkillModelOpen, setSkillModelOpen] = useState(false);
   return (
     <>
-      {isSumModelOpen && <SummaryEditModel closeModel={closeModel} />}
+      {isSumModelOpen && <SummaryEditModel closeModel={() => setSumModelOpen(!isSumModelOpen)} />}
+      {isSkillModelOpen && <SkillEditModel closeModel={() => setSkillModelOpen(!isSkillModelOpen)}/>}
       <StyledProfile>
         <ProfileNavbar />
         <div id="profileBody">
           <div id="leftPart">
             <ProfileDp /> 
-            <Summary closeModel={closeModel} />
-            <Skills />
+            <Summary closeModel={() => setSumModelOpen(!isSumModelOpen)} />
+            <Skills closeModel={() => setSkillModelOpen(!isSkillModelOpen)}/>
             <Github />
             <ProjectCarousel />
           </div>

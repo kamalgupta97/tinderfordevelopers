@@ -1,6 +1,11 @@
-import { UPDATE_SUMMARY } from "./actionTypes";
+import { UPDATE_SUMMARY, UPDATE_SKILL } from "./actionTypes";
 const updateSummary = (payload) => ({
   type: UPDATE_SUMMARY,
   payload,
 });
-export { updateSummary };
+
+const updateSkill = (payload) => ({
+  type: UPDATE_SKILL,
+  payload,
+});
+export { updateSummary, updateSkill };
