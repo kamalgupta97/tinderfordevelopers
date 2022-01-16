@@ -1,0 +1,2 @@
+const UPDATE_SUMMARY = "EDIT_SUMMARY";
+export { UPDATE_SUMMARY };

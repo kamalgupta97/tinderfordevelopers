@@ -6,26 +6,32 @@ import { ProjectCarousel } from "../Components/Profile Page components/ProjectCa
 import { Skills } from "../Components/Profile Page components/Skills";
 import { ProfileNavbar } from "../Components/Profile Page components/ProfileNavbar";
 import { UserAvailable } from "../Components/Profile Page components/UserAvailable";
-import {Recommendations} from "../Components/Profile Page components/Recommendations";
-
+import { Recommendations } from "../Components/Profile Page components/Recommendations";
+import { SummaryEditModel } from "../Components/Profile Page components/SummaryEditModel";
+import { useState } from "react";
 const Profile = () => {
+  const [isSumModelOpen, setSumModelOpen] = useState(false);
+  const closeModel = () =>  setSumModelOpen(!isSumModelOpen);
   return (
-    <StyledProfile>
-      <ProfileNavbar />
-      <div id="profileBody">
-        <div id="leftPart">
-          <ProfileDp />
-          <Summary />
-          <Skills />
-          <Github />
-          <ProjectCarousel />
+    <>
+      {isSumModelOpen && <SummaryEditModel closeModel={closeModel} />}
+      <StyledProfile>
+        <ProfileNavbar />
+        <div id="profileBody">
+          <div id="leftPart">
+            <ProfileDp /> 
+            <Summary closeModel={closeModel} />
+            <Skills />
+            <Github />
+            <ProjectCarousel />
+          </div>
+          <div id="rightPart">
+            <UserAvailable />
+            <Recommendations />
+          </div>
         </div>
-        <div id="rightPart">
-          <UserAvailable />
-          <Recommendations />
-        </div>
-      </div>
-    </StyledProfile>
+      </StyledProfile>
+    </>
   );
 };
 export default Profile;
@@ -33,11 +39,11 @@ const StyledProfile = styled.div`
   & > #profileBody {
     display: flex;
     #leftPart {
-      width:56%;
-      margin:0px 3% 0px 3%
+      width: 56%;
+      margin: 0px 3% 0px 3%;
     }
     #rightPart {
-      width:35%;
+      width: 35%;
     }
   }
 `;
