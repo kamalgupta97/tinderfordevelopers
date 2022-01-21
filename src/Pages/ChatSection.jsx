@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import {
   ChatContainer,
   ChatCont,
@@ -44,19 +45,57 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import { BuddyList } from "../Utils/localStorage";
 import Avatar from "@mui/material/Avatar";
 import { ChatList } from "../Components/ChatList";
+import SocketContext from "../Context/SocketContext";
 
 export const ChatSection = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(["myinfo"]);
+  const users = ["aleemmasai", "rahulmasai", "adityamasai"];
+  useEffect(() => {
+    !cookies.Name &&
+      setCookie("Name", users[Math.floor(Math.random() * 2)], {
+        path: "/",
+      });
+  });
+
+  const socket = useContext(SocketContext);
   const myprofilurl =
     "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
+  const [myemail, setmyemail] = useState("");
   const [selectedUsername, setSelectedUsername] = useState("");
   const [selectedprofilePhoto, setSelectedprofilePhoto] = useState("");
   const [slectedusersMessages, setslectedusersMessages] = useState([]);
+  const [newmessage, setnewmessage] = useState("");
   const handlSelectFriend = (Name, profile_photo, message) => {
     setSelectedUsername(Name);
     setSelectedprofilePhoto(profile_photo);
     setslectedusersMessages(message);
-    console.log(slectedusersMessages);
+    const payload = {
+      fromUser: cookies.Name,
+      toUser: Name,
+    };
+    socket.emit("userDetails", payload);
   };
+  const handleSend = () => {
+    const payload = {
+      fromUser: cookies.Name,
+      toUser: selectedUsername,
+      msg: newmessage,
+    };
+    setnewmessage("");
+
+    socket.emit("chatMessage", payload);
+  };
+
+  useEffect(() => {
+    socket.on("message", (data) => {
+      console.log(data, "message");
+    });
+
+    socket.on("output", (data) => {
+      console.log(data, "output");
+    });
+  }, [selectedUsername]);
+
   return (
     <ChatContainer>
       <ChatCont>
@@ -147,14 +186,21 @@ export const ChatSection = () => {
                     <MicOutlinedIcon />
                   </MicIconType>
                   <TypeArea>
-                    <input type="text" placeholder="Write Something..." />
+                    <input
+                      type="text"
+                      placeholder="Write Something..."
+                      value={newmessage}
+                      onChange={(e) => {
+                        setnewmessage(e.target.value);
+                      }}
+                    />
                   </TypeArea>
                   <OtherIcons>
                     <AttachFileOutlinedIcon />
                     <CameraAltOutlinedIcon />
                     <SentimentVerySatisfiedIcon />
                   </OtherIcons>
-                  <SendCircle>
+                  <SendCircle onClick={handleSend}>
                     <SendIcon />
                   </SendCircle>
                 </TypeMessageCont>

@@ -156,8 +156,8 @@ export const ChatHeaderIcons = styled.div`
 
 export const MessageBox = styled.div`
   margin: 20px auto;
-  height: 500px;
-  max-height: 500px;
+  height: 400px;
+  max-height: 400px;
   width: 95%;
   box-shadow: 0px 2px 0px 0px #ececec;
 `;
@@ -237,7 +237,6 @@ export const MicIconType = styled.div`
 export const TypeArea = styled.div`
   grid-area: mid;
   height: 100%;
-
   & > input {
     border: none;
     width: 100%;
@@ -267,15 +266,6 @@ export const SendCircle = styled.div`
   align-items: center;
 `;
 
-export const ChatSelectedProfileImage = styled.div`
-  width: 50%;
-  margin: 10px auto;
-`;
-export const ChatSelectedProfileName = styled.div`
-  width: 50%;
-  margin: auto;
-`;
-export const ChatSelectedProfileDesignation = styled.div`
-  width: 50%;
-  margin: auto;
-`;
+export const ChatSelectedProfileImage = styled.div``;
+export const ChatSelectedProfileName = styled.div``;
+export const ChatSelectedProfileDesignation = styled.div``;

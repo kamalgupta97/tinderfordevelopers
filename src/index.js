@@ -2,10 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import socketIOClient from "socket.io-client";
+import SocketContext from "./Context/SocketContext";
+import { CookiesProvider } from "react-cookie";
+const ENDPOINT = "http://localhost:5000";
+const socket = socketIOClient(ENDPOINT);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider>
+      <SocketContext.Provider value={socket}>
+        <App />
+      </SocketContext.Provider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

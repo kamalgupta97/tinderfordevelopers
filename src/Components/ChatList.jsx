@@ -15,7 +15,7 @@ export const ChatList = ({
   messages,
   handlSelectFriend,
 }) => {
-  console.log(id, profile_pic, userName, Name, messages);
+  // console.log(id, profile_pic, userName, Name, messages);
   return (
     <SingleFriend
       onClick={() => handlSelectFriend(Name, profile_pic, messages)}
