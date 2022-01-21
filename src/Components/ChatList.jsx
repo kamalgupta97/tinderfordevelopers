@@ -8,27 +8,24 @@ import {
 import Avatar from "@mui/material/Avatar";
 
 export const ChatList = ({
-  id,
+  _id,
   profile_pic,
-  userName,
   Name,
-  messages,
+  email,
   handlSelectFriend,
 }) => {
-  // console.log(id, profile_pic, userName, Name, messages);
+  console.log(_id, profile_pic, email, Name);
   return (
-    <SingleFriend
-      onClick={() => handlSelectFriend(Name, profile_pic, messages)}
-    >
+    <SingleFriend onClick={() => handlSelectFriend(Name, profile_pic, email)}>
       <SingleProfilePhoto>
         <Avatar alt="Remy Sharp" src={profile_pic} />
       </SingleProfilePhoto>
       <SingleProfileName>
         <h4>{Name}</h4>
-        <p>{messages[messages.length - 1].message}</p>
+        {/* <p>{messages[messages.length - 1].message}</p> */}
       </SingleProfileName>
       <SingleProfileTime>
-        {messages[messages.length - 1].time}
+        {/* {messages[messages.length - 1].time} */}
       </SingleProfileTime>
     </SingleFriend>
   );

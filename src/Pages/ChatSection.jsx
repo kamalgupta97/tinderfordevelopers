@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import SearchIcon from "@mui/icons-material/Search";
+import Avatar from "@mui/material/Avatar";
+import { BuddyList } from "../Utils/localStorage";
+import { ChatList } from "../Components/ChatList";
+import SocketContext from "../Context/SocketContext";
+import { MyChatRoom } from "../Components/MyChatRoom";
+import { UserChatSelectedProfile } from "../Components/UserChatSelectedProfile";
 import {
   ChatContainer,
   ChatCont,
@@ -12,90 +19,61 @@ import {
   SerachBoxInput,
   MyfrindslIst,
   ProfileName,
-  ChatHeader,
   DefaultImage,
-  ChatHeaderImage,
-  ChatHeaderName,
-  ChatHeaderIcons,
-  MessageBox,
-  Friendsmessage,
-  Mymessage,
-  StickyMessage,
-  SingleMessageItem,
-  SingleMessageItemImg,
-  StickyMessageMe,
-  TypeMessageContainer,
-  TypeMessageCont,
-  MicIconType,
-  TypeArea,
-  OtherIcons,
-  SendCircle,
-  ChatSelectedProfileImage,
-  ChatSelectedProfileName,
-  ChatSelectedProfileDesignation,
 } from "../Styles";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
-import MicOutlinedIcon from "@mui/icons-material/MicOutlined";
-import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
-import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
-import SendIcon from "@mui/icons-material/Send";
-import SearchIcon from "@mui/icons-material/Search";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import { BuddyList } from "../Utils/localStorage";
-import Avatar from "@mui/material/Avatar";
-import { ChatList } from "../Components/ChatList";
-import SocketContext from "../Context/SocketContext";
 
+const myprofilurl =
+  "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
 export const ChatSection = () => {
+  const [myemail, setmyemail] = useState("");
+  const [allUsers, setallUsers] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState("");
+  const [selectedUsername, setSelectedUsername] = useState("");
+  const [selectedprofilePhoto, setSelectedprofilePhoto] = useState("");
+  const [slectedusersMessages, setslectedusersMessages] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(["myinfo"]);
   const users = ["aleemmasai", "rahulmasai", "adityamasai"];
+  const socket = useContext(SocketContext);
   useEffect(() => {
     !cookies.Name &&
       setCookie("Name", users[Math.floor(Math.random() * 2)], {
         path: "/",
       });
+    socket.on("getallusers", (data) => {
+      setallUsers([...allUsers, ...data]);
+      // console.log(data, "All Users");
+    });
   });
-
-  const socket = useContext(SocketContext);
-  const myprofilurl =
-    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
-  const [myemail, setmyemail] = useState("");
-  const [selectedUsername, setSelectedUsername] = useState("");
-  const [selectedprofilePhoto, setSelectedprofilePhoto] = useState("");
-  const [slectedusersMessages, setslectedusersMessages] = useState([]);
-  const [newmessage, setnewmessage] = useState("");
-  const handlSelectFriend = (Name, profile_photo, message) => {
-    setSelectedUsername(Name);
-    setSelectedprofilePhoto(profile_photo);
-    setslectedusersMessages(message);
-    const payload = {
-      fromUser: cookies.Name,
-      toUser: Name,
-    };
-    socket.emit("userDetails", payload);
-  };
-  const handleSend = () => {
-    const payload = {
-      fromUser: cookies.Name,
-      toUser: selectedUsername,
-      msg: newmessage,
-    };
-    setnewmessage("");
-
-    socket.emit("chatMessage", payload);
-  };
 
   useEffect(() => {
     socket.on("message", (data) => {
       console.log(data, "message");
+      outputMessage(data);
     });
 
     socket.on("output", (data) => {
+      setslectedusersMessages([...slectedusersMessages, ...data]);
       console.log(data, "output");
     });
   }, [selectedUsername]);
+  const handlSelectFriend = (Name, profile_photo, email) => {
+    setSelectedEmail(email);
+    setSelectedUsername(Name);
+    setSelectedprofilePhoto(profile_photo);
 
+    const payload = {
+      fromUser: cookies.Name,
+      toUser: email,
+    };
+    console.log(payload, "payload");
+    socket.emit("userDetails", payload);
+  };
+
+  const outputMessage = (message) => {
+    let newMessages = slectedusersMessages;
+    let finalMessages = newMessages.concat(message);
+    setslectedusersMessages(finalMessages);
+  };
   return (
     <ChatContainer>
       <ChatCont>
@@ -114,98 +92,31 @@ export const ChatSection = () => {
             </SearchBox>
           </SearchCont>
           <MyfrindslIst>
-            {BuddyList.map((item) => (
-              <ChatList
-                key={item.id}
-                {...item}
-                handlSelectFriend={handlSelectFriend}
-              />
-            ))}
+            {allUsers?.map(
+              (item) =>
+                item.email !== cookies.Name && (
+                  <ChatList
+                    key={item._id}
+                    {...item}
+                    handlSelectFriend={handlSelectFriend}
+                  />
+                )
+            )}
+
+            {allUsers?.map(
+              (item) => item.email !== cookies.Name && console.log(item)
+            )}
           </MyfrindslIst>
         </ChatFriendList>
         <ChatRoom>
           {selectedUsername !== "" ? (
-            <>
-              <ChatHeader>
-                <ChatHeaderImage>
-                  <Avatar alt="Remy Sharp" src={selectedprofilePhoto} />
-                </ChatHeaderImage>
-                <ChatHeaderName>
-                  <h4>{selectedUsername}</h4>
-                </ChatHeaderName>
-                <ChatHeaderIcons>
-                  <SearchIcon />
-                  <FavoriteBorderIcon />
-                  <NotificationsActiveOutlinedIcon />
-                </ChatHeaderIcons>
-              </ChatHeader>
-              <MessageBox>
-                {slectedusersMessages?.map((item, i) => (
-                  <SingleMessageItem key={i}>
-                    {item.sender == "kamalmasai" ? (
-                      <Mymessage>
-                        {slectedusersMessages[i].sender !==
-                          slectedusersMessages[i + 1]?.sender && (
-                          <SingleMessageItemImg>
-                            <Avatar
-                              alt="Remy Sharp"
-                              src={myprofilurl}
-                              sx={{ width: 25, height: 25 }}
-                            />
-                          </SingleMessageItemImg>
-                        )}
-
-                        <StickyMessageMe>
-                          <p>{item.message}</p>
-                        </StickyMessageMe>
-                      </Mymessage>
-                    ) : (
-                      <Friendsmessage>
-                        {" "}
-                        <StickyMessage>
-                          <p>{item.message}</p>
-                        </StickyMessage>
-                        {slectedusersMessages[i].sender !==
-                          slectedusersMessages[i + 1]?.sender && (
-                          <SingleMessageItemImg>
-                            <Avatar
-                              alt="Remy Sharp"
-                              src={selectedprofilePhoto}
-                              sx={{ width: 25, height: 25 }}
-                            />
-                          </SingleMessageItemImg>
-                        )}
-                      </Friendsmessage>
-                    )}
-                  </SingleMessageItem>
-                ))}
-              </MessageBox>
-              <TypeMessageContainer>
-                <TypeMessageCont>
-                  <MicIconType>
-                    <MicOutlinedIcon />
-                  </MicIconType>
-                  <TypeArea>
-                    <input
-                      type="text"
-                      placeholder="Write Something..."
-                      value={newmessage}
-                      onChange={(e) => {
-                        setnewmessage(e.target.value);
-                      }}
-                    />
-                  </TypeArea>
-                  <OtherIcons>
-                    <AttachFileOutlinedIcon />
-                    <CameraAltOutlinedIcon />
-                    <SentimentVerySatisfiedIcon />
-                  </OtherIcons>
-                  <SendCircle onClick={handleSend}>
-                    <SendIcon />
-                  </SendCircle>
-                </TypeMessageCont>
-              </TypeMessageContainer>
-            </>
+            <MyChatRoom
+              slectedusersMessages={slectedusersMessages}
+              selectedprofilePhoto={selectedprofilePhoto}
+              selectedUsername={selectedUsername}
+              cookies={cookies}
+              selectedEmail={selectedEmail}
+            />
           ) : (
             <DefaultImage>
               <img
@@ -217,26 +128,10 @@ export const ChatSection = () => {
         </ChatRoom>
 
         <ChatSelectedProfile>
-          <SearchCont>
-            <SearchBox>
-              <SearchIcon />
-              <SerachBoxInput placeholder="Search People"></SerachBoxInput>
-            </SearchBox>
-          </SearchCont>
-
-          <ChatSelectedProfileImage>
-            <Avatar
-              alt="Remy Sharp"
-              src={selectedprofilePhoto}
-              sx={{ width: 100, height: 100 }}
-            />
-          </ChatSelectedProfileImage>
-          <ChatSelectedProfileName>
-            <h4>{selectedUsername}</h4>
-          </ChatSelectedProfileName>
-          <ChatSelectedProfileDesignation>
-            <p>{selectedUsername}</p>
-          </ChatSelectedProfileDesignation>
+          <UserChatSelectedProfile
+            selectedprofilePhoto={selectedprofilePhoto}
+            selectedUsername={selectedUsername}
+          />
         </ChatSelectedProfile>
       </ChatCont>
     </ChatContainer>
