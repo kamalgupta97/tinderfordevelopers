@@ -41,6 +41,9 @@ const initState = {
     twitter_url: "",
     email: "rahulrajput7358@gmail.com",
     phone: "7683004927",
+    user_photo: "/rahul.jpg",
+    user_cover_photo:
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
   },
 };
 const reducer = (store = initState, { type, payload }) => {
@@ -52,7 +55,6 @@ const reducer = (store = initState, { type, payload }) => {
     case UPDATE_GITHUB:
       return { ...store, user_github: payload };
     case UPDATE_PROFILE:
-      console.log("jungle");
       return { ...store, user_profile: { ...store.user_profile, ...payload } };
     default:
       return store;

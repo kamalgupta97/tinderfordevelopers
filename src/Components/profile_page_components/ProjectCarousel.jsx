@@ -77,12 +77,14 @@ function Example(props) {
       }}
       animation={"slide"}
       duration={800}
-      next={(next, active) =>
-        console.log(`we left ${active}, and are now at ${next}`)
-      }
-      prev={(prev, active) =>
-        console.log(`we left ${active}, and are now at ${prev}`)
-      }
+      // next={
+      //   // (next, active) =>
+      //   // console.log(`we left ${active}, and are now at ${next}`)
+      // }
+      // prev={
+      //   // (prev, active) =>
+      //   // console.log(`we left ${active}, and are now at ${prev}`)
+      // }
       NextIcon={<ArrowForwardIosIcon/>}
       PrevIcon={<ArrowBackIosIcon />}
     >

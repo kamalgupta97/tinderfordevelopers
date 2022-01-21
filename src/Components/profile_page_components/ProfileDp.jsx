@@ -8,23 +8,26 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-const ProfileDp = ({ toggleProfileModel , toggleDPModel}) => {
+const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
   const profileInfo = useSelector((store) => store.user_profile);
   return (
     <StyledProfileDp>
       <StyledCoverNDp>
         <div id="cover_img">
+          <div className='editIcon' onClick={toggleCoverModel}>
+            <ModeEditOutlineOutlinedIcon />
+          </div>
           <img
-            src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+            src={profileInfo.user_cover_photo}
             alt=""
           />
         </div>
         <div id="user_dp">
-          <img src="/rahul.jpg" alt="" />
-          <div className="overlay" onClick = {() => toggleDPModel()}>
+          <img src={profileInfo.user_photo} alt="" />
+          <div className="overlay" onClick={() => toggleDPModel()}>
             <div>
-            <CameraAltOutlinedIcon />
-            <p> Change Photo </p>
+              <CameraAltOutlinedIcon />
+              <p> Change Photo </p>
             </div>
           </div>
         </div>
@@ -91,6 +94,19 @@ const StyledCoverNDp = styled.div`
       width: 100%;
       height: 100%;
       border-radius: 20px 20px 0 0;
+    }
+    .editIcon {
+      width:35px;
+      height:35px;
+      cursor: pointer;
+      border-radius: 50%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      background-color:white;
+      position: absolute;
+      right: 3%;
+      top:5%;
     }
   }
   & > #user_dp {

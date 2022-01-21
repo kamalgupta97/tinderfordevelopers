@@ -5,7 +5,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import {  useState } from "react";
-const DPEditModel = ({ toggleModel }) => {
+const CoverPhotoEditModel = ({ toggleModel }) => {
   const [imgData, setImgData] = useState();
   const handleImageChange = (e) => {
     e.preventDefault();
@@ -46,18 +46,18 @@ const DPEditModel = ({ toggleModel }) => {
   return (
     <StyledDialog open={true} onClose={() => toggleModel()}>
       <StyledDialogTitle>
-        <h3> Profile Photo </h3>
+        <h3> Cover Photo </h3>
         <StyledClearIcon onClick={() => toggleModel()} />
       </StyledDialogTitle>
       <StyledDialogContent>
-        <StyledDpOverview className="dp">
+        <StyledCoverOverview >
           <img
             src={
               imgData?.imagePreviewUrl ? imgData.imagePreviewUrl : "/rahul.jpg"
             }
             alt=""
           />
-        </StyledDpOverview>
+        </StyledCoverOverview>
       </StyledDialogContent>
       <footer>
         <StyledIconsCont>
@@ -88,22 +88,18 @@ const DPEditModel = ({ toggleModel }) => {
   );
 };
 
-export { DPEditModel };
-const StyledDpOverview = styled.div`
-  width: 260px;
-  height: 260px;
-  margin: auto;
-  border-radius: 50%;
+export { CoverPhotoEditModel };
+const StyledCoverOverview = styled.div`
+  width: 100%;
+  height: 100%;
   img {
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
   }
 `;
 const StyledDialog = styled(Dialog)`
   &
     div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper {
-    min-width: 40%;
+    min-width: 60%;
     background-color: white;
   }
 `;
@@ -117,6 +113,9 @@ const StyledDialogContent = styled.div`
   padding: 2% 5% 2% 5%;
   border: 1px solid gainsboro;
   border-left: none;
+  max-height:270px;
+  min-height:max-content;
+  overflow:auto;
   border-right: none;
   & > input {
     width: 100%;
