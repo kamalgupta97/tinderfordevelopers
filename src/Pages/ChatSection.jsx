@@ -22,9 +22,8 @@ import {
   DefaultImage,
 } from "../Styles";
 
-const myprofilurl =
-  "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
 export const ChatSection = () => {
+  // const [myprofilurl, myprofilurl] = useState("");
   const [myemail, setmyemail] = useState("");
   const [allUsers, setallUsers] = useState([]);
   const [selectedEmail, setSelectedEmail] = useState("");
@@ -32,28 +31,49 @@ export const ChatSection = () => {
   const [selectedprofilePhoto, setSelectedprofilePhoto] = useState("");
   const [slectedusersMessages, setslectedusersMessages] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(["myinfo"]);
-  const users = ["aleemmasai", "rahulmasai", "adityamasai"];
+  const users = ["kamalgupta97", "aleemmasai", "rahulmasai", "adityamasai"];
+  const profiles = [
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7QC3L7-2a36989f2eb9-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7QAPCP-ccef9b832cf2-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02DQJ38AGG-a88f87687299-512",
+  ];
+  const usernames = [
+    "Kamal Gupta",
+    "Aleem Alam",
+    "Rahul Rajput",
+    "Aditya Kumar",
+  ];
   const socket = useContext(SocketContext);
   useEffect(() => {
-    !cookies.Name &&
-      setCookie("Name", users[Math.floor(Math.random() * 2)], {
+    if (!cookies.email || !cookies.name || !cookies.myprofilurl) {
+      const rand = Math.floor(Math.random() * 4);
+      console.log(rand);
+      setCookie("email", users[rand], {
         path: "/",
       });
+      console.log(rand);
+      setCookie("myprofilurl", profiles[rand], { path: "/" });
+      console.log(rand);
+      setCookie("name", usernames[rand], { path: "/" });
+    }
+
     socket.on("getallusers", (data) => {
-      setallUsers([...allUsers, ...data]);
+      setallUsers([...data]);
       // console.log(data, "All Users");
+    });
+    socket.on("message", (data) => {
+      // console.log(data, "message");
+      data.from == selectedEmail &&
+        setslectedusersMessages([...slectedusersMessages, data]);
     });
   });
 
   useEffect(() => {
-    socket.on("message", (data) => {
-      console.log(data, "message");
-      outputMessage(data);
-    });
-
+    socket.emit("requestAllusers", cookies.email);
     socket.on("output", (data) => {
-      setslectedusersMessages([...slectedusersMessages, ...data]);
       console.log(data, "output");
+      setslectedusersMessages(data);
     });
   }, [selectedUsername]);
   const handlSelectFriend = (Name, profile_photo, email) => {
@@ -62,26 +82,26 @@ export const ChatSection = () => {
     setSelectedprofilePhoto(profile_photo);
 
     const payload = {
-      fromUser: cookies.Name,
+      fromUser: cookies.email,
       toUser: email,
     };
-    console.log(payload, "payload");
+    // console.log(payload, "payload");
     socket.emit("userDetails", payload);
   };
 
   const outputMessage = (message) => {
-    let newMessages = slectedusersMessages;
-    let finalMessages = newMessages.concat(message);
-    setslectedusersMessages(finalMessages);
+    // let newMessages = slectedusersMessages;
+    // let finalMessages = newMessages.concat(message);
+    // setslectedusersMessages(finalMessages);
   };
   return (
     <ChatContainer>
       <ChatCont>
         <ChatFriendList>
           <Myprofile>
-            <Avatar alt="Remy Sharp" src={myprofilurl} />
+            <Avatar alt="Remy Sharp" src={cookies.myprofilurl} />
             <ProfileName>
-              <h4>Kamal Gupta</h4>
+              <h4>{cookies.name}</h4>
               <p>Instructional Associate</p>
             </ProfileName>
           </Myprofile>
@@ -92,20 +112,13 @@ export const ChatSection = () => {
             </SearchBox>
           </SearchCont>
           <MyfrindslIst>
-            {allUsers?.map(
-              (item) =>
-                item.email !== cookies.Name && (
-                  <ChatList
-                    key={item._id}
-                    {...item}
-                    handlSelectFriend={handlSelectFriend}
-                  />
-                )
-            )}
-
-            {allUsers?.map(
-              (item) => item.email !== cookies.Name && console.log(item)
-            )}
+            {allUsers?.map((item) => (
+              <ChatList
+                key={item._id}
+                {...item}
+                handlSelectFriend={handlSelectFriend}
+              />
+            ))}
           </MyfrindslIst>
         </ChatFriendList>
         <ChatRoom>
@@ -128,10 +141,12 @@ export const ChatSection = () => {
         </ChatRoom>
 
         <ChatSelectedProfile>
-          <UserChatSelectedProfile
-            selectedprofilePhoto={selectedprofilePhoto}
-            selectedUsername={selectedUsername}
-          />
+          <div>
+            <UserChatSelectedProfile
+              selectedprofilePhoto={selectedprofilePhoto}
+              selectedUsername={selectedUsername}
+            />
+          </div>
         </ChatSelectedProfile>
       </ChatCont>
     </ChatContainer>

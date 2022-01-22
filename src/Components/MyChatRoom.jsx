@@ -29,8 +29,6 @@ import {
 } from "../Styles";
 import SocketContext from "../Context/SocketContext";
 
-const myprofilurl =
-  "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
 export const MyChatRoom = ({
   slectedusersMessages,
   selectedprofilePhoto,
@@ -38,12 +36,12 @@ export const MyChatRoom = ({
   cookies,
   selectedEmail,
 }) => {
-  console.log(selectedUsername);
+  // console.log(selectedUsername);
   const socket = useContext(SocketContext);
   const [newmessage, setnewmessage] = useState("");
   const handleSend = () => {
     const payload = {
-      fromUser: cookies.Name,
+      fromUser: cookies.email,
       toUser: selectedEmail,
       msg: newmessage,
     };
@@ -69,14 +67,14 @@ export const MyChatRoom = ({
       <MessageBox>
         {slectedusersMessages?.map((item, i) => (
           <SingleMessageItem key={i}>
-            {item.from == cookies.Name ? (
+            {item.from == cookies.email ? (
               <Mymessage>
                 {slectedusersMessages[i].from !==
                   slectedusersMessages[i + 1]?.from && (
                   <SingleMessageItemImg>
                     <Avatar
                       alt="Remy Sharp"
-                      src={myprofilurl}
+                      src={cookies.myprofilurl}
                       sx={{ width: 25, height: 25 }}
                     />
                   </SingleMessageItemImg>
@@ -119,6 +117,11 @@ export const MyChatRoom = ({
               value={newmessage}
               onChange={(e) => {
                 setnewmessage(e.target.value);
+              }}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleSend();
+                }
               }}
             />
           </TypeArea>

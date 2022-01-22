@@ -9,25 +9,25 @@ export const ChatContainer = styled.div`
 
 export const ChatCont = styled.div`
   position: absolute;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
   background: #fff;
-  border-radius: 20px;
-  top: 10%;
-  left: 10%;
+  // border-radius: 20px;
+  // top: 10%;
+  // left: 10%;
   display: grid;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 24% 50% 24%;
   grid-template-rows: 100%;
   grid-gap: 1%;
-
   grid-template-areas: "list room profile";
 `;
 
 export const ChatFriendList = styled.div`
   grid-area: list;
   background: #ececec;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  // border-top-left-radius: 20px;
+  // border-bottom-left-radius: 20px;
 `;
 
 export const ChatRoom = styled.div`
@@ -38,8 +38,12 @@ export const ChatSelectedProfile = styled.div`
   padding: 10% 0%;
   grid-area: profile;
   background: #ececec;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  // border-top-right-radius: 20px;
+  // border-bottom-right-radius: 20px;
+  & > div {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 export const Myprofile = styled.div`
@@ -88,7 +92,27 @@ export const SerachBoxInput = styled.input`
 
 export const MyfrindslIst = styled.div`
   width: 80%;
-  margin: auto;
+  margin: 5% auto;
+  height: 400px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: green;
+  }
 `;
 
 export const SingleFriend = styled.div`
@@ -156,10 +180,29 @@ export const ChatHeaderIcons = styled.div`
 
 export const MessageBox = styled.div`
   margin: 20px auto;
-  height: 400px;
-  max-height: 400px;
+  height: 70vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
   width: 95%;
   box-shadow: 0px 2px 0px 0px #ececec;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 export const Friendsmessage = styled.div`
   grid-area: friendmessage;
@@ -167,25 +210,27 @@ export const Friendsmessage = styled.div`
   text-align: left;
   display: grid;
   justify-content: right;
-  grid-template-columns: 80% 5%;
-  gap: 1%;
+  grid-template-columns: 88% 10%;
+  gap: 2%;
   grid-template-rows: 100%;
   grid-template-areas: "singlemes singleimg";
 `;
 export const Mymessage = styled.div`
+  width: 100%;
+
   grid-area: mymessage;
   align-items: end;
   text-align: left;
   display: grid;
   gap: 5%;
-  grid-template-columns: 5% 90%;
+  grid-template-columns: 10% 88%;
   grid-template-rows: 100%;
   grid-template-areas: "singleimg singlemes";
 `;
 
 export const SingleMessageItem = styled.div`
   margin-top: 10px;
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: 40% 40%;
   gap: 20%;
@@ -195,7 +240,8 @@ export const SingleMessageItem = styled.div`
 export const StickyMessage = styled.div`
   background: green;
   padding: 1px 20px;
-  max-width: 200px;
+  max-width: 100%;
+  height: auto;
   border-radius: 10px 10px 0 10px;
   color: #fff;
   grid-area: singlemes;
@@ -266,6 +312,21 @@ export const SendCircle = styled.div`
   align-items: center;
 `;
 
-export const ChatSelectedProfileImage = styled.div``;
+export const ChatSelectedProfileImage = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  & > div {
+    width: 30%;
+    margin: auto;
+  }
+  & > div > h4 {
+    font-size: 30;
+    line-height: 0;
+  }
+  & > div > p {
+    font-size: 30;
+    line-height: 0;
+  }
+`;
 export const ChatSelectedProfileName = styled.div``;
 export const ChatSelectedProfileDesignation = styled.div``;

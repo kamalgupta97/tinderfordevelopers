@@ -23,18 +23,16 @@ export const UserChatSelectedProfile = ({
       </SearchCont>
 
       <ChatSelectedProfileImage>
-        <Avatar
-          alt="Remy Sharp"
-          src={selectedprofilePhoto}
-          sx={{ width: 100, height: 100 }}
-        />
+        <div>
+          <Avatar
+            alt="Remy Sharp"
+            src={selectedprofilePhoto}
+            sx={{ width: 100, height: 100 }}
+          />
+          <h4>{selectedUsername}</h4>
+          <p>{selectedUsername}</p>
+        </div>
       </ChatSelectedProfileImage>
-      <ChatSelectedProfileName>
-        <h4>{selectedUsername}</h4>
-      </ChatSelectedProfileName>
-      <ChatSelectedProfileDesignation>
-        <p>{selectedUsername}</p>
-      </ChatSelectedProfileDesignation>
     </div>
   );
 };
