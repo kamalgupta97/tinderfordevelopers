@@ -1,4 +1,5 @@
 import "./App.css";
+import Profile from "./Pages/Profile";
 import {
   ChatSection,
   AddProjectImages,
@@ -10,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <ChatSection />
+      {/* <Profile /> */}
     </div>
   );
 }
-
 export default App;

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { store } from "./Redux/store";
 import App from "./App";
 import socketIOClient from "socket.io-client";
 import SocketContext from "./Context/SocketContext";

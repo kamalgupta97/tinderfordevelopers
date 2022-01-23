@@ -1,9 +1,7 @@
-function letsDebug(n) {
-  if (n == 1) {
-    return 1;
-  }
-  return letsDebug(n - 1);
-}
-
-var val = letsDebug(2);
-console.log(val);
+import { createStore } from "redux";
+import { reducer } from "./reducer";
+const store = createStore(
+  reducer
+  // window.__REDUX_DEVTOOLS_EXTENSION_ || window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+export { store };
