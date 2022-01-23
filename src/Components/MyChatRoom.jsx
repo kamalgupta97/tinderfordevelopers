@@ -84,7 +84,7 @@ export const MyChatRoom = ({
                   <p>{item.message}</p>
                 </StickyMessageMe>
               </Mymessage>
-            ) : (
+            ) : item.from == selectedEmail ? (
               <Friendsmessage>
                 {" "}
                 <StickyMessage>
@@ -101,6 +101,8 @@ export const MyChatRoom = ({
                   </SingleMessageItemImgFriend>
                 )}
               </Friendsmessage>
+            ) : (
+              ""
             )}
           </SingleMessageItem>
         ))}

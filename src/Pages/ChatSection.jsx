@@ -42,6 +42,7 @@ export const ChatSection = () => {
     "Rahul Rajput",
     "Aditya Kumar",
   ];
+
   const socket = useContext(SocketContext);
   useEffect(() => {
     if (!cookies.email || !cookies.name || !cookies.myprofilurl) {
@@ -56,30 +57,36 @@ export const ChatSection = () => {
       setCookie("name", usernames[rand], { path: "/" });
     }
     setmyemail(cookies.email);
-
-    socket.on("message", (data) => {
-      setslectedusersMessages([...slectedusersMessages, data]);
-    });
   });
   useEffect(() => {
     socket.emit("requestAllusers", cookies.email);
   }, [myemail]);
+
   useEffect(() => {
+    console.log("Hey");
     socket.on("getallusers", (data) => {
       setallUsers([...data]);
     });
-  }, []);
-
-  useEffect(() => {
     socket.on("output", (data) => {
       console.log(data, "output");
       setslectedusersMessages(data);
     });
-  }, [selectedUsername]);
+
+    socket.on("message", (data) => {
+      outputMessage(data);
+    });
+  });
+  const outputMessage = (message) => {
+    console.log("message", message);
+    let newMessages = slectedusersMessages;
+    let finalMessages = newMessages.concat(message);
+    setslectedusersMessages(finalMessages);
+  };
   const handlSelectFriend = (Name, profile_photo, email) => {
     setSelectedEmail(email);
     setSelectedUsername(Name);
     setSelectedprofilePhoto(profile_photo);
+    console.log(selectedEmail);
 
     const payload = {
       fromUser: cookies.email,
