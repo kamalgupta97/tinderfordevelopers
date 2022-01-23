@@ -3,12 +3,19 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { store } from "./Redux/store";
 import App from "./App";
-import { Provider } from "react-redux";
+import socketIOClient from "socket.io-client";
+import SocketContext from "./Context/SocketContext";
+import { CookiesProvider } from "react-cookie";
+const ENDPOINT = "http://localhost:5000";
+const socket = socketIOClient(ENDPOINT);
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <CookiesProvider>
+      <SocketContext.Provider value={socket}>
+        <App />
+      </SocketContext.Provider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

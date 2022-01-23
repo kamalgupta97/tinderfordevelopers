@@ -31,6 +31,11 @@ export const BuddyList = [
         sender: "adityamasai",
       },
       {
+        time: "11:07 PM",
+        message: "Hey Kamal",
+        sender: "adityamasai",
+      },
+      {
         time: "11:08 PM",
         message: "Hey Aditya",
         sender: "kamalmasai",
@@ -53,6 +58,16 @@ export const BuddyList = [
         time: "11:10 PM",
         message: "Hey Kamal",
         sender: "aleemamasai",
+      },
+      {
+        time: "11:09 PM",
+        message: "Hey Aleem",
+        sender: "kamalmasai",
+      },
+      {
+        time: "11:09 PM",
+        message: "Hey Aleem",
+        sender: "kamalmasai",
       },
     ],
   },

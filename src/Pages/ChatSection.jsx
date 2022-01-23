@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import SearchIcon from "@mui/icons-material/Search";
+import Avatar from "@mui/material/Avatar";
+import { ChatList } from "../Components/ChatList";
+import SocketContext from "../Context/SocketContext";
+import { MyChatRoom } from "../Components/MyChatRoom";
+import { UserChatSelectedProfile } from "../Components/UserChatSelectedProfile";
 import {
   ChatContainer,
   ChatCont,
@@ -11,47 +18,84 @@ import {
   SerachBoxInput,
   MyfrindslIst,
   ProfileName,
-  ChatHeader,
   DefaultImage,
-  ChatHeaderImage,
-  ChatHeaderName,
-  ChatHeaderIcons,
-  MessageBox,
-  Friendsmessage,
-  Mymessage,
-  StickyMessage,
 } from "../Styles";
-import MicOutlinedIcon from "@mui/icons-material/MicOutlined";
-import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
-import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
-import SendIcon from "@mui/icons-material/Send";
-import SearchIcon from "@mui/icons-material/Search";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import { BuddyList } from "../Utils/localStorage";
-import Avatar from "@mui/material/Avatar";
-import { ChatList } from "../Components/ChatList";
 
 export const ChatSection = () => {
-  const myprofilurl =
-    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512";
+  const [myemail, setmyemail] = useState("");
+  const [allUsers, setallUsers] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState("");
   const [selectedUsername, setSelectedUsername] = useState("");
   const [selectedprofilePhoto, setSelectedprofilePhoto] = useState("");
   const [slectedusersMessages, setslectedusersMessages] = useState([]);
-  const handlSelectFriend = (Name, profile_photo, message) => {
+  const [cookies, setCookie, removeCookie] = useCookies(["myinfo"]);
+  const users = ["kamalgupta97", "aleemmasai", "rahulmasai", "adityamasai"];
+  const profiles = [
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7Q99LP-6486727897a6-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7QC3L7-2a36989f2eb9-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02CL7QAPCP-ccef9b832cf2-512",
+    "https://ca.slack-edge.com/T02AMEPGW3Y-U02DQJ38AGG-a88f87687299-512",
+  ];
+  const usernames = [
+    "Kamal Gupta",
+    "Aleem Alam",
+    "Rahul Rajput",
+    "Aditya Kumar",
+  ];
+  const socket = useContext(SocketContext);
+  useEffect(() => {
+    if (!cookies.email || !cookies.name || !cookies.myprofilurl) {
+      const rand = Math.floor(Math.random() * 4);
+      console.log(rand);
+      setCookie("email", users[rand], {
+        path: "/",
+      });
+      console.log(rand);
+      setCookie("myprofilurl", profiles[rand], { path: "/" });
+      console.log(rand);
+      setCookie("name", usernames[rand], { path: "/" });
+    }
+    setmyemail(cookies.email);
+
+    socket.on("message", (data) => {
+      setslectedusersMessages([...slectedusersMessages, data]);
+    });
+  });
+  useEffect(() => {
+    socket.emit("requestAllusers", cookies.email);
+  }, [myemail]);
+  useEffect(() => {
+    socket.on("getallusers", (data) => {
+      setallUsers([...data]);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("output", (data) => {
+      console.log(data, "output");
+      setslectedusersMessages(data);
+    });
+  }, [selectedUsername]);
+  const handlSelectFriend = (Name, profile_photo, email) => {
+    setSelectedEmail(email);
     setSelectedUsername(Name);
     setSelectedprofilePhoto(profile_photo);
-    setslectedusersMessages(message);
-    console.log(slectedusersMessages);
+
+    const payload = {
+      fromUser: cookies.email,
+      toUser: email,
+    };
+    socket.emit("userDetails", payload);
   };
+
   return (
     <ChatContainer>
       <ChatCont>
         <ChatFriendList>
           <Myprofile>
-            <Avatar alt="Remy Sharp" src={myprofilurl} />
+            <Avatar alt="Remy Sharp" src={cookies.myprofilurl} />
             <ProfileName>
-              <h4>Kamal Gupta</h4>
+              <h4>{cookies.name}</h4>
               <p>Instructional Associate</p>
             </ProfileName>
           </Myprofile>
@@ -62,9 +106,9 @@ export const ChatSection = () => {
             </SearchBox>
           </SearchCont>
           <MyfrindslIst>
-            {BuddyList.map((item) => (
+            {allUsers?.map((item) => (
               <ChatList
-                key={item.id}
+                key={item._id}
                 {...item}
                 handlSelectFriend={handlSelectFriend}
               />
@@ -73,43 +117,13 @@ export const ChatSection = () => {
         </ChatFriendList>
         <ChatRoom>
           {selectedUsername !== "" ? (
-            <>
-              <ChatHeader>
-                <ChatHeaderImage>
-                  <Avatar alt="Remy Sharp" src={selectedprofilePhoto} />
-                </ChatHeaderImage>
-                <ChatHeaderName>
-                  <h4>{selectedUsername}</h4>
-                </ChatHeaderName>
-                <ChatHeaderIcons>
-                  <SearchIcon />
-                  <FavoriteBorderIcon />
-                  <NotificationsActiveOutlinedIcon />
-                </ChatHeaderIcons>
-              </ChatHeader>
-              <MessageBox>
-                {slectedusersMessages?.map((item, i) => (
-                  <div key={i}>
-                    {item.sender == "kamalmasai" ? (
-                      <Mymessage>
-                        <Avatar alt="Remy Sharp" src={myprofilurl} />
-                        <StickyMessage>
-                          <p>{item.message}</p>
-                        </StickyMessage>
-                      </Mymessage>
-                    ) : (
-                      <Friendsmessage>
-                        {" "}
-                        <StickyMessage>
-                          <p>{item.message}</p>
-                        </StickyMessage>
-                        <Avatar alt="Remy Sharp" src={selectedprofilePhoto} />
-                      </Friendsmessage>
-                    )}
-                  </div>
-                ))}
-              </MessageBox>
-            </>
+            <MyChatRoom
+              slectedusersMessages={slectedusersMessages}
+              selectedprofilePhoto={selectedprofilePhoto}
+              selectedUsername={selectedUsername}
+              cookies={cookies}
+              selectedEmail={selectedEmail}
+            />
           ) : (
             <DefaultImage>
               <img
@@ -119,7 +133,15 @@ export const ChatSection = () => {
             </DefaultImage>
           )}
         </ChatRoom>
-        <ChatSelectedProfile></ChatSelectedProfile>
+
+        <ChatSelectedProfile>
+          <div>
+            <UserChatSelectedProfile
+              selectedprofilePhoto={selectedprofilePhoto}
+              selectedUsername={selectedUsername}
+            />
+          </div>
+        </ChatSelectedProfile>
       </ChatCont>
     </ChatContainer>
   );
