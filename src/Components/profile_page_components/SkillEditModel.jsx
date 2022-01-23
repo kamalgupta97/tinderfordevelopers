@@ -7,7 +7,7 @@ import { ChipsArray } from "./ChipsArray.material";
 import { updateSkill } from '../../Redux/action'
 import { v4 as uuid } from 'uuid';
 const SkillEditModel = ({ toggleModel }) => {
-    const skillsFromStore = useSelector((store) => store.user_skills);
+    const {skills : skillsFromStore} = useSelector((store) => store.user_profile);
     const [newSkill, setNewSkill] = useState("");
     const [allSkills, setAllSkills] = useState(skillsFromStore);
     const dispatch = useDispatch();
@@ -27,8 +27,8 @@ const SkillEditModel = ({ toggleModel }) => {
         let payload = allSkills.filter((skill) => skill.key !== key);
         setAllSkills(payload);
     }
-    console.log(allSkills)
     const saveSkills = () => {
+        console.log(allSkills)
         dispatch(updateSkill(allSkills))
     }
     return (

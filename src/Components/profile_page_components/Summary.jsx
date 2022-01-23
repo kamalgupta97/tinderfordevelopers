@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import { useSelector } from "react-redux";
 const Summary = ({ toggleModel }) => {
-  const summary = useSelector((store) => store.user_summary);
+  const {summary} = useSelector((store) => store.user_profile);
   const summaryEditModel = () => {
     toggleModel();
   };

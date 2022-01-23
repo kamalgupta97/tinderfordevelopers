@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import {useSelector} from 'react-redux'
 const Github = ({toggleModel}) => {
-  const githubUsername = useSelector(store => store.user_github);
+  const {github : githubUsername} = useSelector(store => store.user_profile);
   return (
     <StyledGithub>
       <header>

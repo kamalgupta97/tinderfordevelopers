@@ -5,7 +5,7 @@ import { Dialog } from "@mui/material";
 import { useDispatch , useSelector} from "react-redux";
 import {updateSummary} from '../../Redux/action'
 const SummaryEditModel = ({ toggleModel }) => {
-  const summaryFromStore = useSelector(store => store.user_summary)
+  const { summary: summaryFromStore} = useSelector(store => store.user_profile)
   const [summary, setSummary] = useState(summaryFromStore)
   const dispatch = useDispatch();
   return (

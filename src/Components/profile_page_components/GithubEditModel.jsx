@@ -5,7 +5,7 @@ import { Dialog } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { updateGithub } from "../../Redux/action";
 const GithubEditModel = ({ toggleModel }) => {
-  const githubUserNameFromStore = useSelector((store) => store.user_github);
+  const {github: githubUserNameFromStore} = useSelector((store) => store.user_profile);
   const [newUserName, setNewUserName] = useState(githubUserNameFromStore);
   const dispatch = useDispatch();
   return (
@@ -19,7 +19,7 @@ const GithubEditModel = ({ toggleModel }) => {
       <footer>
         <button
           onClick={() => {
-            dispatch(updateGithub(newUserName));
+            dispatch(updateGithub( newUserName));
             toggleModel();
           }}
         >

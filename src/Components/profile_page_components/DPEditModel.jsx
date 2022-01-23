@@ -4,7 +4,9 @@ import { Dialog } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import {  useState } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateDP } from '../../Redux/action';
 const DPEditModel = ({ toggleModel }) => {
   const [imgData, setImgData] = useState();
   const handleImageChange = (e) => {
@@ -38,7 +40,7 @@ const DPEditModel = ({ toggleModel }) => {
         body: form,
       })
       let data = await req.json();
-      console.log(data);
+      console.log(data.data.link);
     } catch (err) {
       console.log(err.message)
     }

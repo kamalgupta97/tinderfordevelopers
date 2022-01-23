@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Dialog } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
-import { updateProfile } from "../../Redux/action";
+import { updateProfileInfo } from "../../Redux/action";
 const ProfileEditModel = ({ toggleModel }) => {
   const profileInfoFromStore = useSelector((store) => store.user_profile);
   const [profileInfo, setProfileInfo] = useState(profileInfoFromStore);
@@ -129,7 +129,7 @@ const ProfileEditModel = ({ toggleModel }) => {
       <footer>
         <button
           onClick={() => {
-             dispatch(updateProfile(profileInfo));
+             dispatch(updateProfileInfo(profileInfo));
             toggleModel();
           }}
         >
