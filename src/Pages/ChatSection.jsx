@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import SearchIcon from "@mui/icons-material/Search";
 import Avatar from "@mui/material/Avatar";
-import { BuddyList } from "../Utils/localStorage";
 import { ChatList } from "../Components/ChatList";
 import SocketContext from "../Context/SocketContext";
 import { MyChatRoom } from "../Components/MyChatRoom";
@@ -23,7 +22,6 @@ import {
 } from "../Styles";
 
 export const ChatSection = () => {
-  // const [myprofilurl, myprofilurl] = useState("");
   const [myemail, setmyemail] = useState("");
   const [allUsers, setallUsers] = useState([]);
   const [selectedEmail, setSelectedEmail] = useState("");
@@ -57,20 +55,22 @@ export const ChatSection = () => {
       console.log(rand);
       setCookie("name", usernames[rand], { path: "/" });
     }
+    setmyemail(cookies.email);
 
-    socket.on("getallusers", (data) => {
-      setallUsers([...data]);
-      // console.log(data, "All Users");
-    });
     socket.on("message", (data) => {
-      // console.log(data, "message");
-      data.from == selectedEmail &&
-        setslectedusersMessages([...slectedusersMessages, data]);
+      setslectedusersMessages([...slectedusersMessages, data]);
     });
   });
-
   useEffect(() => {
     socket.emit("requestAllusers", cookies.email);
+  }, [myemail]);
+  useEffect(() => {
+    socket.on("getallusers", (data) => {
+      setallUsers([...data]);
+    });
+  }, []);
+
+  useEffect(() => {
     socket.on("output", (data) => {
       console.log(data, "output");
       setslectedusersMessages(data);
@@ -85,15 +85,9 @@ export const ChatSection = () => {
       fromUser: cookies.email,
       toUser: email,
     };
-    // console.log(payload, "payload");
     socket.emit("userDetails", payload);
   };
 
-  const outputMessage = (message) => {
-    // let newMessages = slectedusersMessages;
-    // let finalMessages = newMessages.concat(message);
-    // setslectedusersMessages(finalMessages);
-  };
   return (
     <ChatContainer>
       <ChatCont>

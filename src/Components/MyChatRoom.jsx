@@ -18,7 +18,7 @@ import {
   Mymessage,
   StickyMessage,
   SingleMessageItem,
-  SingleMessageItemImg,
+  SingleMessageItemImgMe,
   StickyMessageMe,
   TypeMessageContainer,
   TypeMessageCont,
@@ -26,6 +26,7 @@ import {
   TypeArea,
   OtherIcons,
   SendCircle,
+  SingleMessageItemImgFriend,
 } from "../Styles";
 import SocketContext from "../Context/SocketContext";
 
@@ -36,7 +37,6 @@ export const MyChatRoom = ({
   cookies,
   selectedEmail,
 }) => {
-  // console.log(selectedUsername);
   const socket = useContext(SocketContext);
   const [newmessage, setnewmessage] = useState("");
   const handleSend = () => {
@@ -71,13 +71,13 @@ export const MyChatRoom = ({
               <Mymessage>
                 {slectedusersMessages[i].from !==
                   slectedusersMessages[i + 1]?.from && (
-                  <SingleMessageItemImg>
+                  <SingleMessageItemImgMe>
                     <Avatar
                       alt="Remy Sharp"
                       src={cookies.myprofilurl}
                       sx={{ width: 25, height: 25 }}
                     />
-                  </SingleMessageItemImg>
+                  </SingleMessageItemImgMe>
                 )}
 
                 <StickyMessageMe>
@@ -92,13 +92,13 @@ export const MyChatRoom = ({
                 </StickyMessage>
                 {slectedusersMessages[i].from !==
                   slectedusersMessages[i + 1]?.from && (
-                  <SingleMessageItemImg>
+                  <SingleMessageItemImgFriend>
                     <Avatar
                       alt="Remy Sharp"
                       src={selectedprofilePhoto}
                       sx={{ width: 25, height: 25 }}
                     />
-                  </SingleMessageItemImg>
+                  </SingleMessageItemImgFriend>
                 )}
               </Friendsmessage>
             )}

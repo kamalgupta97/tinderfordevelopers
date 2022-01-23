@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { device } from "./MediaQueries.style";
 
 export const ChatContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100vh;
-  background: green;
+  background: rgb(0, 200, 5);
 `;
 
 export const ChatCont = styled.div`
@@ -13,17 +14,41 @@ export const ChatCont = styled.div`
   height: 100vh;
   overflow: hidden;
   background: #fff;
-  // border-radius: 20px;
-  // top: 10%;
-  // left: 10%;
   display: grid;
-  grid-template-columns: 24% 50% 24%;
-  grid-template-rows: 100%;
-  grid-gap: 1%;
-  grid-template-areas: "list room profile";
+  @media only screen and ${device.laptop} {
+    grid-template-columns: 24% 50% 24%;
+    grid-template-rows: 100%;
+    grid-gap: 1%;
+    grid-template-areas: "list room profile";
+  }
+  @media only screen and ${device.laptopL} {
+    grid-template-columns: 24% 50% 24%;
+    grid-template-rows: 100%;
+    grid-gap: 1%;
+    grid-template-areas: "list room profile";
+  }
+  @media only screen and ${device.desktop} {
+    grid-template-columns: 24% 50% 24%;
+    grid-template-rows: 100%;
+    grid-gap: 1%;
+    grid-template-areas: "list room profile";
+  }
+  @media only screen and ${device.desktopL} {
+    grid-template-columns: 24% 50% 24%;
+    grid-template-rows: 100%;
+    grid-gap: 1%;
+    grid-template-areas: "list room profile";
+  }
+  @media only screen and ${device.ipad} {
+    grid-template-columns: 24% 50% 24%;
+    grid-template-rows: 100%;
+    grid-gap: 1%;
+    grid-template-areas: "room room room";
+  }
 `;
 
 export const ChatFriendList = styled.div`
+cursor
   grid-area: list;
   background: #ececec;
   // border-top-left-radius: 20px;
@@ -31,8 +56,11 @@ export const ChatFriendList = styled.div`
 `;
 
 export const ChatRoom = styled.div`
+  width: 100%;
   grid-area: room;
   background: #fff;
+  @media only screen and ${device.ipad} {
+  }
 `;
 export const ChatSelectedProfile = styled.div`
   padding: 10% 0%;
@@ -43,6 +71,8 @@ export const ChatSelectedProfile = styled.div`
   & > div {
     width: 95%;
     margin: auto;
+  }
+  @media only screen and ${device.ipad} {
   }
 `;
 
@@ -59,7 +89,7 @@ export const ProfileName = styled.div`
   text-align: left;
   & > h4 {
     line-height: 0;
-    color: teal;
+    color: rgb(0, 200, 5);
     font-size: 15px;
   }
   & > p {
@@ -111,11 +141,17 @@ export const MyfrindslIst = styled.div`
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: green;
+    background: rgb(0, 200, 5);
   }
 `;
 
 export const SingleFriend = styled.div`
+  color: rgb(0, 200, 5);
+  &:hover {
+    // background: #cecece;
+    color: teal !important;
+  }
+  cursor: pointer;
   width: 100%;
   display: grid;
   align-items: center;
@@ -132,7 +168,6 @@ export const SingleProfileName = styled.div`
   grid-area: message;
   text-align: left;
   & > h4 {
-    color: teal;
     line-height: 0;
   }
   & > p {
@@ -164,6 +199,31 @@ export const ChatHeader = styled.div`
   grid-template-columns: 8% 80% 12%;
   grid-template-rows: 100%;
   grid-template-areas: "img prof ico";
+  @media only screen and ${device.ipad} {
+    width: 90%;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 100%;
+    grid-template-areas: "img prof ico";
+  }
+  @media only screen and ${device.tablet} {
+    width: 90%;
+    grid-template-columns: 10% 75% 10%;
+    grid-template-rows: 100%;
+    grid-template-areas: "img prof ico";
+  }
+  @media only screen and ${device.mobileL} {
+    width: 90%;
+    grid-template-columns: 20% 60% 10%;
+    grid-template-rows: 100%;
+    grid-template-areas: "img prof ico";
+  }
+
+  @media only screen and ${device.mobileS} {
+    width: 90%;
+    grid-template-columns: 20% 50% 20%;
+    grid-template-rows: 100%;
+    grid-template-areas: "img prof ico";
+  }
 `;
 export const ChatHeaderImage = styled.div`
   grid-area: img;
@@ -203,6 +263,12 @@ export const MessageBox = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  @media only screen and ${device.mobileS} {
+    width: 95%;
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+  }
 `;
 export const Friendsmessage = styled.div`
   grid-area: friendmessage;
@@ -210,54 +276,67 @@ export const Friendsmessage = styled.div`
   text-align: left;
   display: grid;
   justify-content: right;
-  grid-template-columns: 88% 10%;
-  gap: 2%;
   grid-template-rows: 100%;
+  grid-template-columns: 90% 10%;
   grid-template-areas: "singlemes singleimg";
+  @media only screen and ${device.mobileS} {
+    grid-template-columns: 85% 15%;
+    grid-template-areas: "singlemes singleimg";
+  }
 `;
 export const Mymessage = styled.div`
   width: 100%;
-
   grid-area: mymessage;
   align-items: end;
   text-align: left;
   display: grid;
-  gap: 5%;
-  grid-template-columns: 10% 88%;
+  grid-template-columns: 10% 90%;
   grid-template-rows: 100%;
   grid-template-areas: "singleimg singlemes";
+  @media only screen and ${device.mobileS} {
+    grid-template-columns: 15% 85%;
+    grid-template-areas: "singleimg singlemes";
+  }
 `;
 
 export const SingleMessageItem = styled.div`
   margin-top: 10px;
   width: 90%;
   display: grid;
-  grid-template-columns: 40% 40%;
+  grid-template-columns: 45% 45%;
   gap: 20%;
   grid-template-areas: "mymessage friendmessage";
+  @media only screen and ${device.mobileS} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const StickyMessage = styled.div`
-  background: green;
+  background: #cecece;
   padding: 1px 20px;
-  max-width: 100%;
-  height: auto;
   border-radius: 10px 10px 0 10px;
-  color: #fff;
+  color: black;
   grid-area: singlemes;
 `;
 
 export const StickyMessageMe = styled.div`
-  background: green;
+  background: rgb(0, 200, 5);
   padding: 1px 20px;
-  max-width: 200px;
   border-radius: 10px 10px 10px 0px;
   color: #fff;
   grid-area: singlemes;
 `;
 
-export const SingleMessageItemImg = styled.div`
+export const SingleMessageItemImgMe = styled.div`
   grid-area: singleimg;
+  display: flex;
+  justify-content: start;
+`;
+export const SingleMessageItemImgFriend = styled.div`
+  grid-area: singleimg;
+  display: flex;
+  justify-content: end;
 `;
 
 export const TypeMessageContainer = styled.div`
@@ -266,14 +345,32 @@ export const TypeMessageContainer = styled.div`
   height: 60px;
   border-radius: 30px;
   background: #ececec;
+  @media only screen and ${device.mobileS} {
+    height: 60px;
+  }
 `;
 export const TypeMessageCont = styled.div`
   display: grid;
+  width: 90%;
   height: 100%;
-  grid-template-columns: 7% 70% 11% 3%;
   align-items: center;
+  grid-template-columns: 7% 80% 11% 3%;
   gap: 1%;
   grid-template-areas: "lef mid right rightt";
+  @media only screen and ${device.mobileS} {
+    grid-template-columns: 15% 35% 30% 20%;
+    grid-template-areas: "lef mid right rightt";
+  }
+  @media only screen and ${device.mobileM} {
+    background: red;
+    grid-template-columns: 10% 50% 25% 15%;
+    grid-template-areas: "lef mid right rightt";
+  }
+  @media only screen and ${device.mobileL} {
+    background: rgb(0, 200, 5);
+    grid-template-columns: 10% 50% 25% 15%;
+    grid-template-areas: "lef mid right rightt";
+  }
 `;
 
 export const MicIconType = styled.div`
@@ -282,16 +379,20 @@ export const MicIconType = styled.div`
 `;
 export const TypeArea = styled.div`
   grid-area: mid;
-  height: 100%;
+
   & > input {
     border: none;
     width: 100%;
-    height: 80%;
     background: #ececec;
     font-size: 20px;
   }
   & > input:focus {
     outline: none;
+  }
+  @media only screen and ${device.mobileS} {
+    & > input {
+      font-size: 16px;
+    }
   }
 `;
 export const OtherIcons = styled.div`
@@ -301,11 +402,15 @@ export const OtherIcons = styled.div`
   align-items: center;
 `;
 export const SendCircle = styled.div`
+  cursor: pointer;
+  &:hover {
+    background: teal;
+  }
   grid-area: rightt;
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  background: green;
+  background: rgb(0, 200, 5);
   color: white;
   display: flex;
   justify-content: center;

@@ -6,8 +6,6 @@ import {
   SearchBox,
   SerachBoxInput,
   ChatSelectedProfileImage,
-  ChatSelectedProfileName,
-  ChatSelectedProfileDesignation,
 } from "../Styles";
 export const UserChatSelectedProfile = ({
   selectedUsername,
