@@ -8,6 +8,8 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import Tooltip from '@mui/material/Tooltip';
+
 const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
   const profileInfo = useSelector((store) => store.user_profile);
   return (
@@ -23,7 +25,7 @@ const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
           />
         </div>
         <div id="user_dp">
-          <img src = {profileInfo.dp} alt="DP" />
+          <img src={profileInfo.dp} alt="DP" />
           <div className="overlay" onClick={() => toggleDPModel()}>
             <div>
               <CameraAltOutlinedIcon />
@@ -42,27 +44,37 @@ const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
           {profileInfo.location}
         </div>
         <div className="social_media_icons">
-          <StyledSocialIcon>
-            <a href={profileInfo.github} target="_blank">
-              <GitHubIcon />
-            </a>
-          </StyledSocialIcon>
-          <StyledSocialIcon>
-            <a href={profileInfo.linkedin_url} target="_blank">
-              <LinkedInIcon />
-            </a>
-          </StyledSocialIcon>
-          <StyledSocialIcon>
-            <a href={profileInfo.twitter_url} target="_blank">
-              <TwitterIcon />
-            </a>
-          </StyledSocialIcon>
-          <StyledSocialIcon>
-            <MailIcon />
-          </StyledSocialIcon>
-          <StyledSocialIcon>
-            <LocalPhoneIcon />
-          </StyledSocialIcon>
+          <Tooltip title="Github">
+            <StyledSocialIcon>
+              <a href={profileInfo.github} target="_blank">
+                <GitHubIcon />
+              </a>
+            </StyledSocialIcon>
+          </Tooltip>
+          <Tooltip title="Linkedin">
+            <StyledSocialIcon>
+              <a href={profileInfo.linkedin_url} target="_blank">
+                <LinkedInIcon />
+              </a>
+            </StyledSocialIcon>
+          </Tooltip>
+          <Tooltip title="Twitter">
+            <StyledSocialIcon>
+              <a href={profileInfo.twitter_url} target="_blank">
+                <TwitterIcon />
+              </a>
+            </StyledSocialIcon>
+          </Tooltip>
+          <Tooltip title="Mail">
+            <StyledSocialIcon>
+              <MailIcon />
+            </StyledSocialIcon>
+          </Tooltip>
+          <Tooltip title="Phone Number">
+            <StyledSocialIcon>
+              <LocalPhoneIcon />
+            </StyledSocialIcon>
+          </Tooltip>
         </div>
         {/* Edit profile button */}
         <StyledEditProfileBtn onClick={() => toggleProfileModel()}>
@@ -181,6 +193,7 @@ const StyledSocialIcon = styled.div`
   border-radius: 10px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
   align-items: center;
   & > img {
     width: 70%;

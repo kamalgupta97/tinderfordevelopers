@@ -4,13 +4,14 @@ import { Dialog } from "@mui/material";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+
 const Model = ({ toggleModel , modelName, children, onSave, isImgModel}) => {
   return (
     <StyledDialog open={true} onClose={() => toggleModel()}>
       <StyledDialogTitle>
         <h3> {modelName} </h3> <StyledClearIcon onClick={() => toggleModel()} />
       </StyledDialogTitle>
-      <StyledDialogContent>
+      <StyledDialogContent isImgModel={isImgModel}>
         {children}
       </StyledDialogContent>
       <footer>
@@ -70,7 +71,7 @@ const StyledDialogContent = styled.div`
   overflow: auto;
   & + footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: ${(props) => props.isImgModel ? "space-between" : "flex-end"};
     padding: 2% 5% 2% 5%;
     button {
       padding: 10px 20px 10px 20px;
