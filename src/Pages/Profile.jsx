@@ -49,7 +49,7 @@ const Profile = () => {
     </>
   );
 };
-export default Profile;
+export {Profile};
 const StyledProfile = styled.div`
   & > #profileBody {
     display: flex;

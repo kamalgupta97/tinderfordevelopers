@@ -1,18 +1,20 @@
 import "./App.css";
-import Profile from "./Pages/Profile";
 import {
   ChatSection,
   AddProjectImages,
   AddProjectDesciptions,
   CreateAccountForm,
+  Home,
+  Profile,
 } from "./Pages";
 
 function App() {
   return (
     <div className="App">
+      <Home />
       {/* <CreateAccountForm /> */}
       {/* <AddProjectDesciptions /> */}
-      <Profile />
+      {/* <Profile /> */}
     </div>
   );
 }
