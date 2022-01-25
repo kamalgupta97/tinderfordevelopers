@@ -31,7 +31,7 @@ const STDIV = styled.div`
   }
 `;
 
-export const Navbar = () => {
+export const Navbar = ({handleSignupModel}) => {
   return (
     <STDIV>
       <div className="block-1">
@@ -39,7 +39,7 @@ export const Navbar = () => {
         <img className="logo-text" src="/Assets/logo-text.png" alt="" />
       </div>
       <div className="links">
-        <div className="link">SignUp</div>
+        <div className="link" onClick={handleSignupModel}>SignUp</div>
         <div className="link">Login</div>
         <div className="link">About</div>
         <div className="link">Contact</div>
