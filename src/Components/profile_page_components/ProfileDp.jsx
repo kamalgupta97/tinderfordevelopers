@@ -18,12 +18,12 @@ const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
             <ModeEditOutlineOutlinedIcon />
           </div>
           <img
-            src={profileInfo.user_cover_photo}
+            src={profileInfo.cover_photo}
             alt=""
           />
         </div>
         <div id="user_dp">
-          <img src={profileInfo.user_photo} alt="" />
+          <img src = {profileInfo.dp} alt="DP" />
           <div className="overlay" onClick={() => toggleDPModel()}>
             <div>
               <CameraAltOutlinedIcon />
@@ -43,7 +43,7 @@ const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
         </div>
         <div className="social_media_icons">
           <StyledSocialIcon>
-            <a href={profileInfo.github_url} target="_blank">
+            <a href={profileInfo.github} target="_blank">
               <GitHubIcon />
             </a>
           </StyledSocialIcon>

@@ -9,12 +9,12 @@ import { UserAvailable } from "../Components/profile_page_components/UserAvailab
 import { Recommendations } from "../Components/profile_page_components/Recommendations";
 import { useState } from "react";
 // models
-import {ProfileEditModel} from '../Components/profile_page_components/ProfileEditModel'
-import { SummaryEditModel } from "../Components/profile_page_components/SummaryEditModel";
-import { SkillEditModel } from '../Components/profile_page_components/SkillEditModel';
-import {GithubEditModel} from "../Components/profile_page_components/GithubEditModel"
-import { DPEditModel } from '../Components/profile_page_components/DPEditModel';
-import {CoverPhotoEditModel} from '../Components/profile_page_components/CoverPhotoEditModel'
+import {ProfileEditModel} from '../Components/profile_page_components/models/ProfileEditModel'
+import { SummaryEditModel } from "../Components/profile_page_components/models/SummaryEditModel";
+import { SkillEditModel } from '../Components/profile_page_components/models/SkillEditModel';
+import {GithubEditModel} from "../Components/profile_page_components/models/GithubEditModel"
+import { DPEditModel } from '../Components/profile_page_components/models/DPEditModel';
+import {CoverPhotoEditModel} from '../Components/profile_page_components/models/CoverPhotoEditModel'
 const Profile = () => {
   const [isSumModelOpen, setSumModelOpen] = useState(false);
   const [isSkillModelOpen, setSkillModelOpen] = useState(false);

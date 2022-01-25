@@ -3,7 +3,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import { ChipsArray } from './ChipsArray.material';
 import { useSelector } from 'react-redux';
 const Skills = ({toggleModel}) => {
-  const skillsFromStore = useSelector(store => store.user_skills);
+  const {skills} = useSelector(store => store.user_profile);
   const skillsEditModel = () => {
     toggleModel();
   };
@@ -13,7 +13,7 @@ const Skills = ({toggleModel}) => {
         <h2 id="title">Tech Stack / Skills</h2>
         <StyledModeEditOutlineOutlinedIcon  onClick={skillsEditModel}/>
       </header>
-      <ChipsArray chips={ skillsFromStore }/>
+      <ChipsArray chips={ skills }/>
     </StyledSkills>
   );
 };

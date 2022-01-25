@@ -2,7 +2,9 @@ import {
   UPDATE_SUMMARY,
   UPDATE_SKILL,
   UPDATE_GITHUB,
-  UPDATE_PROFILE,
+  UPDATE_PROFILE_INFO,
+  UPDATE_DP,
+  UPDATE_COVER,
 } from "./actionTypes";
 const summaryContent = `Hii there!  🙋‍♂️
 
@@ -22,15 +24,6 @@ Check out my work at: https://github.com/Rahul3105/
 
 Contact me 📧: rahulrajput7358@gmail.com`;
 const initState = {
-  user_summary: summaryContent,
-  user_skills: [
-    { key: 0, label: "Angular" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-  ],
-  user_github: "rahul3105",
   user_profile: {
     first_name: "Rahul",
     last_name: "Rajput",
@@ -41,21 +34,52 @@ const initState = {
     twitter_url: "",
     email: "rahulrajput7358@gmail.com",
     phone: "7683004927",
-    user_photo: "/rahul.jpg",
-    user_cover_photo:
+    dp: "/rahul.jpg",
+    cover_photo:
       "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    summary: summaryContent,
+    skills: [
+      { key: 0, label: "Angular" },
+      { key: 1, label: "jQuery" },
+      { key: 2, label: "Polymer" },
+      { key: 3, label: "React" },
+      { key: 4, label: "Vue.js" },
+    ],
+    github: "rahul3105",
   },
 };
 const reducer = (store = initState, { type, payload }) => {
   switch (type) {
     case UPDATE_SUMMARY:
-      return { ...store, user_summary: payload };
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, summary: payload },
+      };
     case UPDATE_SKILL:
-      return { ...store, user_skills: payload };
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, skills: payload },
+      };
     case UPDATE_GITHUB:
-      return { ...store, user_github: payload };
-    case UPDATE_PROFILE:
-      return { ...store, user_profile: { ...store.user_profile, ...payload } };
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, github: payload },
+      };
+    case UPDATE_PROFILE_INFO:
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, ...payload },
+      };
+    case UPDATE_DP:
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, dp: payload },
+      };
+    case UPDATE_COVER:
+      return {
+        ...store,
+        user_profile: { ...store.user_profile, cover_photo: payload },
+      };
     default:
       return store;
   }
