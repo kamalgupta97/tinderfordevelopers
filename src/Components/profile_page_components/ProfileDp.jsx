@@ -23,7 +23,7 @@ const ProfileDp = ({ toggleProfileModel, toggleDPModel, toggleCoverModel }) => {
           />
         </div>
         <div id="user_dp">
-          <img src={profileInfo.dp} alt="" />
+          <img src = {profileInfo.dp} alt="DP" />
           <div className="overlay" onClick={() => toggleDPModel()}>
             <div>
               <CameraAltOutlinedIcon />

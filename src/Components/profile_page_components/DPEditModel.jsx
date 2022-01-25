@@ -8,7 +8,9 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateDP } from '../../Redux/action';
 const DPEditModel = ({ toggleModel }) => {
-  const [imgData, setImgData] = useState();
+  const dispatch = useDispatch();
+  const {dp} = useSelector((state) => state.user_profile)
+  const [imgData, setImgData] = useState({});
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
@@ -40,7 +42,9 @@ const DPEditModel = ({ toggleModel }) => {
         body: form,
       })
       let data = await req.json();
-      console.log(data.data.link);
+      console.log(data)
+
+      dispatch(updateDP(data.data.link))
     } catch (err) {
       console.log(err.message)
     }
@@ -54,9 +58,7 @@ const DPEditModel = ({ toggleModel }) => {
       <StyledDialogContent>
         <StyledDpOverview className="dp">
           <img
-            src={
-              imgData?.imagePreviewUrl ? imgData.imagePreviewUrl : "/rahul.jpg"
-            }
+            src={imgData.imagePreviewUrl || dp}
             alt=""
           />
         </StyledDpOverview>
