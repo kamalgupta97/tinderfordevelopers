@@ -5,8 +5,19 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import {  useState } from "react";
+import AvatarEditor from "react-avatar-editor";
+import {useSelector, useDispatch}  from 'react-redux'
+
 const CoverPhotoEditModel = ({ toggleModel }) => {
-  const [imgData, setImgData] = useState();
+  const {cover_photo} = useSelector((state) => state.user_profile)
+  // for showing input ranges for zoom level and straight level
+  const [showEditCont, setShowEditCont] = useState(false);
+  /// this is what avatar model will give me
+
+  const [editedImg, setEditedImg] = useState();
+  const [imgZoomLevel, setImgZoomLevel] = useState(1);
+  const [imgRotateLevel, setImgRotateLevel] = useState(0);
+  const [imgData, setImgData] = useState({});
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
@@ -50,18 +61,51 @@ const CoverPhotoEditModel = ({ toggleModel }) => {
         <StyledClearIcon onClick={() => toggleModel()} />
       </StyledDialogTitle>
       <StyledDialogContent>
-        <StyledCoverOverview >
-          <img
-            src={
-              imgData?.imagePreviewUrl ? imgData.imagePreviewUrl : "/rahul.jpg"
-            }
-            alt=""
-          />
-        </StyledCoverOverview>
+        {showEditCont ?
+          <>
+            <div style={{"width":"60%", "margin" :"auto"}}>
+                <StyledAvatarEditor
+                  ref={(editor) => setEditedImg(editor)}
+                  image={imgData.imagePreviewUrl || cover_photo}
+                  border={50}
+                  color={[0, 0, 0, 0.6]}
+                  scale={+imgZoomLevel}
+                  borderRadius={115}
+                  rotate={+imgRotateLevel}
+                />
+            </div>
+            <StyledEditingMode>
+                <div className="inputRange">
+                  <label htmlFor="">
+                    Zoom {imgZoomLevel}
+                    <input
+                      type="range"
+                      value={imgZoomLevel}
+                      onChange={(e) => setImgZoomLevel(e.target.value)}
+                      min="1"
+                      max="10"
+                    />
+                  </label>
+                  <label htmlFor="">
+                    Straighten {imgRotateLevel}
+                    <input
+                      type="range"
+                      value={imgRotateLevel}
+                      onChange={(e) => setImgRotateLevel(e.target.value)}
+                      min="-180"
+                      max="180"
+                    />
+                  </label>
+                </div>
+              </StyledEditingMode>
+            </> : <StyledImagePreview>
+              <img src={imgData.imagePreviewUrl || cover_photo} alt="" />
+            </StyledImagePreview>
+          }
       </StyledDialogContent>
       <footer>
         <StyledIconsCont>
-          <div>
+          <div onClick={() => setShowEditCont(!showEditCont)}>
             <ModeEditOutlineOutlinedIcon />
             <h4>Edit</h4>
           </div>
@@ -85,10 +129,42 @@ const CoverPhotoEditModel = ({ toggleModel }) => {
         <button onClick={ uploadImg }>Save</button>
       </footer>
     </StyledDialog>
-  );
+    );
 };
 
 export { CoverPhotoEditModel };
+  const StyledImagePreview = styled.div`
+  width:280px;
+  height:280px;
+  border-radius: 50%;
+  margin:auto;
+  & > img {
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+  }
+
+`
+  const StyledEditingMode = styled.div`
+  margin: 2% 0;
+  padding: 2% 0;
+  & > .inputRange {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    label {
+      width: 48%;
+    }
+    label > input {
+      display: block;
+      width: 100%;
+    }
+  }
+`;
+const StyledAvatarEditor = styled(AvatarEditor)`
+  width: 100% !important;
+  height: 100% !important;
+`;
 const StyledCoverOverview = styled.div`
   width: 100%;
   height: 100%;

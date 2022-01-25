@@ -10,7 +10,7 @@ import {
 function App() {
   return (
     <div className="App">
-      {/* <ChatSection /> */}
+      {/* <AddProjectDesciptions /> */}
       <Profile />
     </div>
   );
