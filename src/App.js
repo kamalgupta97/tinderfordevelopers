@@ -1,12 +1,21 @@
 import "./App.css";
-import SwapPage from "./Pages/SwapPage";
+import {
+  ChatSection,
+  AddProjectImages,
+  AddProjectDesciptions,
+  CreateAccountForm,
+  Home,
+  Profile,
+} from "./Pages";
 
 function App() {
   return (
     <div className="App">
-      <SwapPage />
+      {/* <Home /> */}
+      {/* <CreateAccountForm /> */}
+      {/* <AddProjectDesciptions /> */}
+      <Profile />
     </div>
   );
 }
-
 export default App;
