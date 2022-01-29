@@ -30,7 +30,7 @@ export const FormContainer = styled.div`
     background-color: #f2f2f2;
     text-align: center;
     color: -internal-light-dark(black, white);
-    margin: auto;
+    margin: 20px auto;
   }
   & input:focus {
     outline: none;
