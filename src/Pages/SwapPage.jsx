@@ -5,6 +5,7 @@ import TechStack from "../Components/TechStack";
 import StarIcon from "@mui/icons-material/Star";
 import GitHubCalendar from "react-github-calendar";
 import MyButton from "../Components/MyButton";
+import {ProjectCarousel} from "../Components/profile_page_components/ProjectCarousel";
 
 const Container = styledComponents.div`
 width:50%;
@@ -88,6 +89,9 @@ export default function SwapPage() {
         }}
         username="AleemAlam"
       />
+      <div style={{height:"100px", border:"1px solid red"}}>
+          <ProjectCarousel/>
+      </div>
       <SwappingButtons>
         <MyButton>No</MyButton>
         <button className="profile">View Profile</button>
