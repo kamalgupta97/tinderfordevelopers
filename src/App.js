@@ -11,10 +11,10 @@ import {
 function App() {
   return (
     <div className="App">
-      {/* <Home /> */}
+      <Home />
       {/* <CreateAccountForm /> */}
       {/* <AddProjectDesciptions /> */}
-      <Profile />
+      {/* <Profile /> */}
     </div>
   );
 }
