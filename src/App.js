@@ -8,13 +8,16 @@ import {
   Profile,
 } from "./Pages";
 
+import SwapPage from "./Pages/SwapPage";
+
 function App() {
   return (
     <div className="App">
       {/* <Home /> */}
-      {/* <CreateAccountForm /> */}
+      <CreateAccountForm />
       {/* <AddProjectDesciptions /> */}
-      <Profile />
+      {/* <Profile /> */}
+      {/* <SwapPage/> */}
     </div>
   );
 }
